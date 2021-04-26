@@ -1,0 +1,17 @@
+
+
+
+@keyframes hue {
+    0%, 100%  { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(180deg); }
+}
+
+@keyframes saturate {
+    0%, 100% { filter: saturate(2);}
+    50% { filter: saturate(0); }
+}
+
+@keyframes translate {
+    0%, 100% { transform: translateX(-25%);}
+    50% { transform: translateX(25%);}
+}
