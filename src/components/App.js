@@ -4,9 +4,11 @@ import Mash from './Mash';
 
 const App = () => {
     return (
-        <div> 
-            <LayersPanel />
-            <Mash /> 
+        <div className="bg-muidark" style={{width: "100%", height: "100vh"}}> 
+            <div style={{display: "flex"}}>
+                <LayersPanel />
+                <Mash />
+            </div>
         </div>
     );
 }
