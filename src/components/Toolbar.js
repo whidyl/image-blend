@@ -33,24 +33,24 @@ const Toolbar = () => {
     }
 
     return (
-        <div className="flex justify-evenly">
-            <div class="bg-muidark-2 p-3 mt-4 mr-4 rounded-md flex items-center justify-around w-full">
-                <span className="whitespace-nowrap">
+        <div className="flex justify-evenly flex-shrink">
+            <div class="bg-muidark-2 p-3 mt-4 mr-4 rounded-md flex items-center justify-around w-full ">
+                <span className="">
                     <label className="text-white text-sm font-medium pl-1 pr-3"> Width: </label>
-                    <input type="number" value={9999} class="px-2 py-2 text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30 w-16 h-8"/>
+                    <input type="number" value={9999} class="px-2 py-2 text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30 w-16"/>
                 </span>
-                <span className="whitespace-nowrap">
-                    <label className="text-white text-sm font-medium pl-9 pr-3"> Height: </label>
-                    <input type="number" value={9999} class="px-2 py-2 text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30 w-16 h-8"/>
+                <span className="">
+                    <label className="text-white text-sm font-medium pl-3 pr-3"> Height: </label>
+                    <input type="number" value={9999} class="px-2 py-2 text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30 w-16"/>
                 </span>
 
-                <h1 className="mr-5 ml-5 text-white opacity-20">|</h1>
+                <h1 className="mr-1 ml-1 text-white opacity-20">|</h1>
 
                 <button class="px-2 py-2 ml-1 mr-1 text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30"> Randomize Terms </button>
                 <button class="px-2 py-2 ml-1 mr-1 text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30"> Randomize Blending </button>
                 <button class="px-2 py-2 ml-1 mr-1 text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30"> Randomize Effects </button>
                 
-                <h1 className="mr-5 ml-5 text-white opacity-20">|</h1>
+                <h1 className="mr-1 ml-1 text-white opacity-20">|</h1>
                 {renderDropdown()}
                 {/* <button class="px-2 py-2 ml-1 mr-1 text-white bg-muidark-4 rounded text-sm border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30"> Finalize </button> */}
             </div>

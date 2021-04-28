@@ -16,7 +16,7 @@ const Mash = () => {
     // }, [])
 
     return (
-        <div style={{ width: "500px", height: "500px", position: "absolute"}}>
+        <div style={{ width: "500px", height: "500px", position: "absolute", display: "inline-block"}}>
             <ImageLayer url="https://source.unsplash.com/random/?anime" blendMode="normal" opacity="100%"/>
             <ImageLayer url="https://source.unsplash.com/random/?goth" blendMode="color-dodge" animate=""/>
             <ImageLayer url="https://source.unsplash.com/random/?death" blendMode="overlay" opacity="100%"/>

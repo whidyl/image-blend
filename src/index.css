@@ -24,21 +24,3 @@ div::-webkit-scrollbar-thumb {
   background-color: #404040;
   border-radius: 12px;
 }
-
-@media only screen and (min-width: 600px) {
-  html {
-    zoom: 0.8;
-  }
-}
-
-@media only screen and (min-width: 800px) {
-  html {
-    zoom: 0.9;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  html {
-    zoom: 1;
-  }
-}
