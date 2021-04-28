@@ -11,7 +11,6 @@ const Layer = (props) => {
     const [open, setOpen] = useState(false);
     const [animateOver, setAnimateOver] = useState(false);
 
-
     return (
         <div className="bg-muidark-4 mb-2 p-3 rounded-md w-72 shadow-lg" {...props} ref={props.innerRef}>
             <div  className="flex flex-nowrap items-center w-full">
