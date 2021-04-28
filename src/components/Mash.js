@@ -16,10 +16,11 @@ const Mash = () => {
     // }, [])
 
     return (
-        <div style={{ width: "500px", height: "500px", margin: "200px 600px", position: "absolute"}}>
-            <ImageLayer url="https://source.unsplash.com/random/?texture" blendMode="normal" opacity="100%"/>
-            <ImageLayer url="https://source.unsplash.com/random/?lightning" blendMode="color-dodge" animate=""/>
-            <ImageLayer url="https://source.unsplash.com/random/?colorful" blendMode="color" opacity="100%" animate="hue" duration={10}/>
+        <div style={{ width: "500px", height: "500px", position: "absolute"}}>
+            <ImageLayer url="https://source.unsplash.com/random/?anime" blendMode="normal" opacity="100%"/>
+            <ImageLayer url="https://source.unsplash.com/random/?goth" blendMode="color-dodge" animate=""/>
+            <ImageLayer url="https://source.unsplash.com/random/?death" blendMode="overlay" opacity="100%"/>
+            
         </div>
     );
 }

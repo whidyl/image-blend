@@ -6,13 +6,22 @@ module.exports = {
       '1000': '100',
     },
     extend: {
+      transitionProperty: {
+        'max-height' : 'max-height',
+      },
       animation: {
-        'dropdown' : 'dropdown 3s linear forwards',
+        'dropdown' : 'dropdown 1s linear 1',
+        'flip' : 'flip 0.2s linear 1 normal forwards ',
+        'unflip': 'flip 0.2s linear 1 normal reverse backwards ',
       },
       keyframes: {
         'dropdown' : {
           '0%' : {maxHeight: '0'},
           '100%': {maxHeight: '500px'},
+        },
+        'flip' : {
+          '0%' : {transform: 'rotate(0deg)'},
+          '100%' : {transform: 'rotate(180deg)'},
         }
       },
       backgroundColor: theme => ({
