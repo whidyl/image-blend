@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import Layer from './Layer'
+import Layer from "./Layer";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
-
 
 const LayersPanel = () => {
   const [layerData, setLayerData] = useState([
     {
       type: "UNSPLASH_QUERY",
       query: "colorful rainbow",
-      label: "Colorful Rainbow",
+      label: "Colorful Rainbow ", 
       id: "1",
     },
     {
@@ -67,14 +65,11 @@ const LayersPanel = () => {
             setLayerData([newLayer, ...layerData]);
           }}
         >
-          <img className="w-8 h-8r" src="icons8-add-image-48.png" />
+          <img className="w-8 h-8r" src="icons8-add-image-48.png" alt="new layer" />
         </div>
         <Droppable droppableId="1">
           {(provided) => (
-            <div 
-                {...provided.droppableProps} 
-                ref={provided.innerRef}
-            >
+            <div {...provided.droppableProps} ref={provided.innerRef}>
               {layerData.map((layer, index) => {
                 return (
                   <Draggable
