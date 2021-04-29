@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import { useState } from "react";
 import LayerMenu from './LayerMenu';
 
 const Layer = (props: any) => {
@@ -6,9 +6,9 @@ const Layer = (props: any) => {
 
   const Handle = (props: any) => {
     return (
-      <div className=" h-7 w-7 min-w-max mr-4 flex " {...props}>
+      <div className="h-7 w-7 min-w-max mr-4 flex no-flick " {...props}>
         <img
-          className="items-center opacity-50 hover:opacity-100"
+          className="h-7 w-7  no-flick items-center opacity-50 hover:opacity-100"
           src="icons8-menu-24.png"
           alt="drag layer"
         />
@@ -18,7 +18,7 @@ const Layer = (props: any) => {
 
   return (
     <div
-      className="bg-muidark-4 mb-2 p-3 rounded-md w-72 shadow-lg"
+      className="bg-muidark-4 mb-2 p-3 rounded-md w-72 shadow-lg no-flick"
       {...props}
       ref={props.innerRef}
     >

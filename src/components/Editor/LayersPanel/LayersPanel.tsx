@@ -65,7 +65,7 @@ const LayersPanel = () => {
             setLayerData([newLayer, ...layerData]);
           }}
         >
-          <img className="w-8 h-8r" src="icons8-add-image-48.png" alt="new layer" />
+          <img className="w-8 h-8" src="icons8-add-image-48.png" alt="new layer" />
         </div>
         <Droppable droppableId="1">
           {(provided) => (

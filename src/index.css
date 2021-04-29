@@ -25,6 +25,8 @@
     background-color: #404040;
     border-radius: 12px;
     }
+
+    /* .no-flick {-webkit-transform:translate3d(0,0,0); -webkit-transform-style: preserve-3d; -webkit-backface-visibility: hidden;} */
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
