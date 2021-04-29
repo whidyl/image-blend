@@ -2,7 +2,7 @@ import { useState } from "react";
 import LayerMenu from './LayerMenu';
 
 const Layer = (props: any) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const Handle = (props: any) => {
     return (
