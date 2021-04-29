@@ -86,6 +86,8 @@ const TBDropdown: React.FC = () => {
   );
 };
 
+
+
 const Toolbar = () => {
   return (
     <div className="flex justify-evenly flex-shrink">
@@ -116,7 +118,7 @@ const Toolbar = () => {
         <label className="pl-3 pr-3 text-white text-sm font-medium">
           Randomize:
         </label>
-        
+
         <button className="px-4 py-2 ml-1 mr-1 basic-clickable"> Terms </button>
         <button className="px-4 py-2 ml-1 mr-1 basic-clickable"> Blending </button>
         <button className="px-4 py-2 ml-1 mr-1 basic-clickable"> Effects </button>
