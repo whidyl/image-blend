@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ImageLayer from './ImageLayer';
 import axios from 'axios';
-import '../animations.css';
+import '../../animations.css';
 
 
 const Mash = () => {
@@ -20,7 +20,6 @@ const Mash = () => {
             <ImageLayer url="https://source.unsplash.com/random/?anime" blendMode="normal" opacity="100%"/>
             <ImageLayer url="https://source.unsplash.com/random/?goth" blendMode="color-dodge" animate=""/>
             <ImageLayer url="https://source.unsplash.com/random/?death" blendMode="overlay" opacity="100%"/>
-            
         </div>
     );
 }
