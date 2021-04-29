@@ -10,7 +10,7 @@ const LayerMenu = () => {
         <input
           type="text"
           placeholder="Image search query"
-          class=" mr-1 px-2 py-2 basic-clickable rounded-md bg-muidark-2 shadow-inner flex-grow placeholder-white placeholder-opacity-30"
+          className=" mr-1 px-2 py-2 basic-clickable rounded-md bg-muidark-2 shadow-inner flex-grow placeholder-white placeholder-opacity-30"
         />
       </span>
       <span className="mt-2 flex flex-row items-center">
@@ -18,7 +18,7 @@ const LayerMenu = () => {
           Opacity:
         </label>
         <input
-          class="mr-1 rounded-lg overflow-hidden appearance-none bg-muidark-2 h-3 w-auto flex-grow"
+          className="mr-1 rounded-lg overflow-hidden appearance-none bg-muidark-2 h-3 w-auto flex-grow"
           type="range"
           min="1"
           max="100"
@@ -30,9 +30,9 @@ const LayerMenu = () => {
         <label className="ml-1 mr-7 text-white text-sm font-medium">
           Effects:
         </label>
-        <div class="relative flex">
+        <div className="relative flex">
           <svg
-            class="w-2 h-2 m-4 absolute top-0 right-0 pointer-events-none"
+            className="w-2 h-2 m-4 absolute top-0 right-0 pointer-events-none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 412 232"
           >

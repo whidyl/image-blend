@@ -24,7 +24,7 @@ const LayersPanel = () => {
     },
   ]);
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: any) => {
     const { destination, source } = result;
 
     if (!destination) {

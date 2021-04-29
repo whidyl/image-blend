@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ImageLayer from "./ImageLayer";
 import "../../animations.css";
 
-const Mash = () => {
+const Mash: React.FC = () => {
   const urls = [];
 
   // useEffect(() => {
@@ -30,7 +30,7 @@ const Mash = () => {
       <ImageLayer
         url="https://source.unsplash.com/random/?goth"
         blendMode="color-dodge"
-        animate=""
+        opacity= "100%"
       />
       <ImageLayer
         url="https://source.unsplash.com/random/?death"

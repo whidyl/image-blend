@@ -1,5 +1,15 @@
-import React from "react";
-const ImageLayer = ({ url, blendMode, opacity, animate, duration }) => {
+import React, { CSSProperties } from "react";
+import CSS from 'csstype';
+
+interface Props {
+  url: string;
+  blendMode: CSS.Property.MixBlendMode;
+  opacity: CSS.Property.Opacity;
+  animate?: string;
+  duration?: number;
+}
+
+const ImageLayer: React.FC<Props> = ({ url, blendMode, opacity, animate, duration }) => {
   return (
     <img
       src={url}

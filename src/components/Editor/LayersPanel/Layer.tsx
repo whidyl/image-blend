@@ -1,10 +1,10 @@
 import React, { useState, Fragment } from "react";
 import LayerMenu from './LayerMenu';
 
-const Layer = (props) => {
+const Layer = (props: any) => {
   const [open, setOpen] = useState(false);
 
-  const Handle = (props) => {
+  const Handle = (props: any) => {
     return (
       <div className=" h-7 w-7 min-w-max mr-4 flex " {...props}>
         <img
