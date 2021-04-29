@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
 import ImageLayer from "./ImageLayer";
 import "../../animations.css";
+import { Layer, ILayer } from '../../types'
 
-const Mash: React.FC = () => {
-  const urls = [];
+interface Props {
+  layers: Layer[]
+  mashSize: {width: number, height: number}
+}
+
+const Mash: React.FC<Props> = ({layers, mashSize}) => {
 
   // useEffect(() => {
   //     const fetchImage = async () => {
@@ -13,30 +18,27 @@ const Mash: React.FC = () => {
   //     fetchImage();
   // }, [])
 
+  let renderedLayers = layers.map((layer) =>{
+    if (layer.type === "IMAGE_SEARCH") {
+      let imgLayer = layer as ILayer;
+      return (
+        <ImageLayer key={imgLayer.id} blendMode={imgLayer.mode} opacity={imgLayer.opacity} url={imgLayer.url} />
+      );
+    } else {
+      return null;
+    }
+  });
+
   return (
     <div
       style={{
-        width: "500px",
-        height: "500px",
+        width: `${mashSize.width}px`,
+        height: `${mashSize.height}px`,
         position: "absolute",
         display: "inline-block",
       }}
     >
-      <ImageLayer
-        url="https://source.unsplash.com/random/?anime"
-        blendMode="normal"
-        opacity="100%"
-      />
-      <ImageLayer
-        url="https://source.unsplash.com/random/?goth"
-        blendMode="color-dodge"
-        opacity= "100%"
-      />
-      <ImageLayer
-        url="https://source.unsplash.com/random/?death"
-        blendMode="overlay"
-        opacity="100%"
-      />
+      {renderedLayers}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import CSS from 'csstype';
 interface Props {
   url: string;
   blendMode: CSS.Property.MixBlendMode;
-  opacity: CSS.Property.Opacity;
+  opacity: number;
   animate?: string;
   duration?: number;
 }
@@ -19,7 +19,7 @@ const ImageLayer: React.FC<Props> = ({ url, blendMode, opacity, animate, duratio
         height: "100%",
         objectFit: "cover",
         position: "inherit",
-        opacity: opacity ? opacity : 1,
+        opacity: `${opacity}%`,
         mixBlendMode: blendMode,
         animation: animate
           ? `${animate} ${duration ? duration : 3}s infinite`
