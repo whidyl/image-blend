@@ -27,7 +27,7 @@ const Layer = (props: any) => {
       <div className="flex flex-nowrap items-center w-full">
         <Handle {...props.dragHandleProps} />
         <h1 className="text-white font-sans whitespace-nowrap">
-          {props.label}{" "}
+          {props.data.query}
         </h1>
         <span className="w-full justify-end flex">
           <img
@@ -45,7 +45,7 @@ const Layer = (props: any) => {
         </span>
       </div>
       <div className={`bg-muidark-4 transition-max-height overflow-hidden ${open ? "max-h-96" : "max-h-0"}`}>
-        {open ? <LayerMenu /> : null}
+        {open ? <LayerMenu opacity={props.data.opacity} setOpacity={props.setOpacity} /> : null}
       </div>
     </div>
   );

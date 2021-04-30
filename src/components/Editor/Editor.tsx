@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LayersPanel from "./LayersPanel/LayersPanel";
 import Mash from "../Mash/Mash";
 import Toolbar from "./Toolbar";
-import { Layer, ILayer } from '../../types';
+import { AbstractLayer, ILayer } from '../../types';
 
 const initialLayers: ILayer[] = [
   {
@@ -35,14 +35,31 @@ const initialLayers: ILayer[] = [
 ]
 
 const Editor = () => {
-  const [layers, setLayers] = useState<Layer[]>(initialLayers);
+  const [layers, setLayers] = useState<AbstractLayer[]>(initialLayers);
   const [mashSize, setMashSize] = useState<{width?: number, height?: number}>({width: 1000, height: 500});
+
+  const setLayerOpacity = (id:string, newOpacity: number) => {
+    setLayers(layers.map(layer => {
+      if (layer.id == id) {
+        return {...layer, opacity: newOpacity}
+      }  else {
+        return layer
+      }
+    }));
+  }
+
+  const moveLayer = (from: number, to: number) => {
+    let layersTemp = [...layers];
+    let layerTemp = layersTemp.splice(from, 1)[0];
+    layersTemp.splice(to, 0, layerTemp);
+    setLayers(layersTemp);
+  }
 
   return (
     <div className="bg-muidark w-full h-screen">
       <div className="flex h-full">
         <div className="z-10 w-96 ">
-          <LayersPanel />
+          <LayersPanel layers={layers} setLayerOpacity={setLayerOpacity} moveLayer={moveLayer}/>
         </div>
         <div className="h-full w-full flex flex-col ">
           <div className="h-24 bg-muidark flex-initial z-10 ">

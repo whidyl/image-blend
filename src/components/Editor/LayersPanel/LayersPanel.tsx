@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import Layer from "./Layer";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { AbstractLayer } from "../../../types"
 
-const LayersPanel = () => {
+
+interface Props {
+  layers: AbstractLayer[];
+  setLayerOpacity: (id: string, newOpacity: number) => void;
+  moveLayer: (from: number, to: number) => void;
+  
+}
+
+const LayersPanel: React.FC<Props> = ({ layers, setLayerOpacity, moveLayer}) => {
   const [layerData, setLayerData] = useState([
     {
       type: "UNSPLASH_QUERY",
@@ -70,7 +79,7 @@ const LayersPanel = () => {
         <Droppable droppableId="1">
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              {layerData.map((layer, index) => {
+              {layers.map((layer, index) => {
                 return (
                   <Draggable
                     draggableId={layer.id}
@@ -82,7 +91,8 @@ const LayersPanel = () => {
                         {...provided.draggableProps}
                         dragHandleProps={provided.dragHandleProps}
                         innerRef={provided.innerRef}
-                        label={layer.label}
+                        data={layer}
+                        setOpacity={(amount: number) => setLayerOpacity(layer.id, amount)}
                         deleteSelf={() => {
                           setLayerData(
                             layerData.filter((l) => l.id !== layer.id)

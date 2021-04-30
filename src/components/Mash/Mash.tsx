@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import ImageLayer from "./ImageLayer";
 import "../../animations.css";
-import { Layer, ILayer } from '../../types'
+import { AbstractLayer, ILayer } from '../../types'
 
 interface Props {
-  layers: Layer[]
+  layers: AbstractLayer[]
   mashSize: {width?: number, height?: number}
 }
 
