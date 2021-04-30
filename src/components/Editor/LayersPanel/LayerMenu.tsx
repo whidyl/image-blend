@@ -1,28 +1,18 @@
 import React from 'react'
+import ImgSearchBox from './ImgSearchBox';
 
 interface Props {
   query: string;
   opacity: number;
   setQuery: (query: string) => void;
   setOpacity: (amount: number) => void;
-  refreshURL: () => void
+  refreshURL: () => void;
 }
 
 const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, refreshURL}) => {
   return (
     <div className="h-auto flex flex-col flex-nowrap">
-      <span className="mb-1 mt-2 flex items-center">
-        <label className="ml-1 mr-7 text-white text-sm font-medium">
-          Search:
-        </label>
-        <input
-          type="text"
-          placeholder="Image search query"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          className=" mr-2 px-1 pl-2 py-2 basic-clickable rounded-md bg-muidark-2 shadow-inner flex-grow placeholder-white placeholder-opacity-30"
-        />
-      </span>
+      <ImgSearchBox query={query} setQuery={setQuery} refreshURL={refreshURL} />
       <span className="mt-2 flex flex-row items-center">
         <label className="ml-1 mr-7 text-white text-sm font-medium">
           Effects:
