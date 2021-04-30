@@ -21,8 +21,8 @@ const Layer = (props: any) => {
   return (
     <div
       className="bg-muidark-4 mb-2 p-3 rounded-md w-72 shadow-lg no-flick"
-      {...props}
       ref={props.innerRef}
+      {...props.draggableProps}
     >
       <div className="flex flex-nowrap items-center w-full">
         <Handle {...props.dragHandleProps} />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ImageLayer from "./ImageLayer";
 import "../../animations.css";
 import { AbstractLayer, ILayer } from '../../types'
