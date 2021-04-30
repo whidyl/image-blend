@@ -87,7 +87,7 @@ const LayersPanel: React.FC<Props> = ({ layers, setLayerOpacity, moveLayer, refr
                   >
                     {(provided) => (
                       <Layer
-                        {...provided.draggableProps}
+                        draggableProps={provided.draggableProps}
                         dragHandleProps={provided.dragHandleProps}
                         innerRef={provided.innerRef}
                         data={layer}
