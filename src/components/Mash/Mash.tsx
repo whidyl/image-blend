@@ -3,6 +3,8 @@ import ImageLayer from "./ImageLayer";
 import "../../animations.css";
 import { AbstractLayer, ILayer } from '../../types'
 
+//! visualize layer stack with 3D
+
 interface Props {
   layers: AbstractLayer[]
   mashSize: {width?: number, height?: number}
