@@ -48,10 +48,7 @@ const LayersPanel: React.FC<Props> = ({ layers, setLayerOpacity, moveLayer}) => 
     }
 
     // update array removing and readding layer to correct index.
-    let layersTemp = [...layerData];
-    let layerTemp = layersTemp.splice(source.index, 1)[0];
-    layersTemp.splice(destination.index, 0, layerTemp);
-    setLayerData(layersTemp);
+    moveLayer(source.index, destination.index);
   };
 
   const newLayer = {
