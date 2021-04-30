@@ -1,5 +1,7 @@
+import PreviousMap from "postcss/lib/previous-map";
 import React, { useState } from "react";
 //TODO: export via codepen API
+//TODO: load examples
 
 const TBDropdown: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -86,9 +88,12 @@ const TBDropdown: React.FC = () => {
   );
 };
 
+interface Props {
+  mashSize: { width?: number, height?: number};
+  setMashSize: (newState: {width?: number, height?: number}) => void;
+}
 
-
-const Toolbar = () => {
+const Toolbar: React.FC<Props> = ({ mashSize, setMashSize }) => {
   return (
     <div className="flex justify-evenly flex-shrink">
       <div className="p-3 mt-4 mr-4 w-full max-w-screen-lg bg-muidark-2 rounded-md flex items-center justify-around">
@@ -98,7 +103,8 @@ const Toolbar = () => {
           </label>
           <input
             type="number"
-            value={9999}
+            value={mashSize.width}
+            onChange={(e) => setMashSize({ width: parseInt(e.target.value) })}
             className="px-2 py-2 w-16 basic-clickable"
           />
         </span>
@@ -108,7 +114,8 @@ const Toolbar = () => {
           </label>
           <input
             type="number"
-            value={9999}
+            value={mashSize.height}
+            onChange={(e) => setMashSize({ height: parseInt(e.target.value) })}
             className="px-2 py-2 w-16 basic-clickable"
           />
         </span>

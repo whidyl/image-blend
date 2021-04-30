@@ -5,7 +5,7 @@ import { Layer, ILayer } from '../../types'
 
 interface Props {
   layers: Layer[]
-  mashSize: {width: number, height: number}
+  mashSize: {width?: number, height?: number}
 }
 
 const Mash: React.FC<Props> = ({layers, mashSize}) => {

@@ -36,7 +36,7 @@ const initialLayers: ILayer[] = [
 
 const Editor = () => {
   const [layers, setLayers] = useState<Layer[]>(initialLayers);
-  const [mashSize, setMashSize] = useState<{width: number, height: number}>({width: 1000, height: 500});
+  const [mashSize, setMashSize] = useState<{width?: number, height?: number}>({width: 1000, height: 500});
 
   return (
     <div className="bg-muidark w-full h-screen">
@@ -48,7 +48,7 @@ const Editor = () => {
           <div className="h-24 bg-muidark flex-initial z-10 ">
             <Toolbar mashSize={mashSize} setMashSize={setMashSize}/>
           </div>
-          <div className="p-20 bg-muidark flex-auto flex items-center justify-center z-0 overflow-y-auto overflow-x-auto">
+          <div className="p-20 bg-muidark relative flex-auto flex items-center justify-center z-0 overflow-y-auto overflow-x-auto">
             <Mash layers={layers} mashSize={mashSize}/>
           </div>
         </div>
