@@ -10,5 +10,4 @@ export interface ILayer extends AbstractLayer {
   url: string;
   mode: CSS.Property.MixBlendMode;
   opacity: number;
-  needsFetch: boolean;
 }

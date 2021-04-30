@@ -3,15 +3,17 @@ import Layer from "./Layer";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { AbstractLayer } from "../../../types"
 
+// ! range slider that allows for setting the start and stop of animations.
 
 interface Props {
   layers: AbstractLayer[];
   setLayerOpacity: (id: string, newOpacity: number) => void;
   moveLayer: (from: number, to: number) => void;
-  
+  refreshURL: (layerID: string, query: string) => void;
+  setLayerQuery: (id: string, newQuery: string) => void;
 }
 
-const LayersPanel: React.FC<Props> = ({ layers, setLayerOpacity, moveLayer}) => {
+const LayersPanel: React.FC<Props> = ({ layers, setLayerOpacity, moveLayer, refreshURL, setLayerQuery}) => {
   const [layerData, setLayerData] = useState([
     {
       type: "UNSPLASH_QUERY",
@@ -90,6 +92,8 @@ const LayersPanel: React.FC<Props> = ({ layers, setLayerOpacity, moveLayer}) => 
                         innerRef={provided.innerRef}
                         data={layer}
                         setOpacity={(amount: number) => setLayerOpacity(layer.id, amount)}
+                        setQuery={(query: string) => setLayerQuery(layer.id, query)}
+                        refreshURL={(query: string) => refreshURL(layer.id, query)}
                         deleteSelf={() => {
                           setLayerData(
                             layerData.filter((l) => l.id !== layer.id)

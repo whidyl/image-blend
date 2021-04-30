@@ -12,7 +12,6 @@ const initialLayers: ILayer[] = [
     mode: "normal",
     url: "https://source.unsplash.com/random/?boobs",
     opacity: 100,
-    needsFetch: false,
     id: "1",
   },
   {
@@ -21,7 +20,6 @@ const initialLayers: ILayer[] = [
     mode: "difference",
     opacity: 50,
     url: "https://source.unsplash.com/random/?girls",
-    needsFetch: false,
     id: "2",
   },
   {
@@ -30,7 +28,6 @@ const initialLayers: ILayer[] = [
     mode: "multiply",
     opacity: 50,
     url: "",
-    needsFetch: true,
     id: "3",
   },
 ]
@@ -40,42 +37,24 @@ const Editor = () => {
   const [mashSize, setMashSize] = useState<{width?: number, height?: number}>({width: 1000, height: 500});
 
   useEffect(() => {
-    refreshURLs();
-  },[])
-
-  const refreshURLs = () => {
-    const layersToFetch = layers.filter(layer => {
+    for (const layer of layers) {
       if (layer.type === "IMAGE_SEARCH") {
-        const imgLayer = layer as ILayer;
-        return imgLayer.needsFetch;
-      } 
-      return false;
-    })
-    const imgLayersToFetch = layersToFetch as ILayer[];
-    // now that layers are qued to be fetched, we don't need them to be fetched anymore.
-    for (const imgLayer of imgLayersToFetch) {
-      console.log(`to be set:`);
-      console.log(imgLayer);
-      setLayerNeedsFetch(imgLayer.id, false);
-    }
-
-
-
-    //TODO: set warning message on layer for bad request
-
-    const fetchUrl = async (query: string) => {
-      const response = await axios.get(`https://source.unsplash.com/random/?${query.replaceAll(' ', '-')}`);
-      return response.request.responseURL;
-    }
-
-    const setURLs = async () => {
-      for (const imgLayer of imgLayersToFetch) {
-        const url = await fetchUrl(imgLayer.query)
-        setLayerURL(imgLayer.id, url);
+        const imgLayer = layer as ILayer
+        refreshURL(imgLayer.id, imgLayer.query)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-    setURLs();
+  const refreshURL = (layerID: string, query: string) => {
+    //TODO: set warning message on layer for bad request
+
+    const fetchURL = async () => {
+      const response = await axios.get(`https://source.unsplash.com/random/?${query.replaceAll(' ', '-')}`);
+      setLayerURL(layerID, response.request.responseURL) ;
+    }
+
+    fetchURL();
   }
 
 
@@ -92,7 +71,6 @@ const Editor = () => {
   const setLayerURL = (id:string, newURL: string) => {
     setLayers(prev => prev.map(layer => {
       if (layer.id === id) {
-        console.log(layer);
         return {...layer, url: newURL}
       }  else {
         return layer
@@ -100,13 +78,11 @@ const Editor = () => {
     }));
   }
 
-  const setLayerNeedsFetch = (id:string, newNeedsFetch: boolean) => {
+  const setLayerQuery = (id: string, newQuery: string) => {
     setLayers(prev => prev.map(layer => {
       if (layer.id === id) {
-        console.log("layer needsFetch was updated:")
-        console.log(layer);
-        return {...layer, needsFetch: newNeedsFetch}
-      } else {
+        return {...layer, query: newQuery}
+      }  else {
         return layer
       }
     }));
@@ -123,7 +99,7 @@ const Editor = () => {
     <div className="bg-muidark w-full h-screen">
       <div className="flex h-full">
         <div className="z-10 w-96 ">
-          <LayersPanel layers={layers} setLayerOpacity={setLayerOpacity} moveLayer={moveLayer}/>
+          <LayersPanel layers={layers} setLayerOpacity={setLayerOpacity} moveLayer={moveLayer} refreshURL={refreshURL} setLayerQuery={setLayerQuery}/>
         </div>
         <div className="h-full w-full flex flex-col ">
           <div className="h-24 bg-muidark flex-initial z-10 ">

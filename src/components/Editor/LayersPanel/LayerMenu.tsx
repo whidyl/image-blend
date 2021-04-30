@@ -1,11 +1,14 @@
 import React from 'react'
 
 interface Props {
+  query: string;
   opacity: number;
+  setQuery: (query: string) => void;
   setOpacity: (amount: number) => void;
+  refreshURL: () => void
 }
 
-const LayerMenu:React.FC<Props> = ({opacity, setOpacity}) => {
+const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, refreshURL}) => {
   return (
     <div className="h-auto flex flex-col flex-nowrap">
       <span className="mb-1 mt-2 flex items-center">
@@ -15,6 +18,8 @@ const LayerMenu:React.FC<Props> = ({opacity, setOpacity}) => {
         <input
           type="text"
           placeholder="Image search query"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
           className=" mr-2 px-1 pl-2 py-2 basic-clickable rounded-md bg-muidark-2 shadow-inner flex-grow placeholder-white placeholder-opacity-30"
         />
       </span>

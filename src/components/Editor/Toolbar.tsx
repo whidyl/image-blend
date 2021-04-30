@@ -1,4 +1,3 @@
-import PreviousMap from "postcss/lib/previous-map";
 import React, { useState } from "react";
 //TODO: export via codepen API
 //TODO: load examples

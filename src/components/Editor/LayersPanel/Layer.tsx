@@ -45,7 +45,7 @@ const Layer = (props: any) => {
         </span>
       </div>
       <div className={`bg-muidark-4 transition-max-height overflow-hidden ${open ? "max-h-96" : "max-h-0"}`}>
-        {open ? <LayerMenu opacity={props.data.opacity} setOpacity={props.setOpacity} /> : null}
+        {open ? <LayerMenu query={props.data.query} opacity={props.data.opacity} setQuery={props.setQuery} setOpacity={props.setOpacity} refreshURL={() => props.refreshURL(props.data.query)}/> : null}
       </div>
     </div>
   );
