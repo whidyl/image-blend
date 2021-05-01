@@ -26,6 +26,7 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 			return;
 		}
 
+    console.log("move layer dispatched")
 		layersDispatch({ type: 'MOVE_LAYER', payload: { from: source.index, to: destination.index } });
 	};
 

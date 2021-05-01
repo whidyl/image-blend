@@ -20,7 +20,7 @@ const Mash: React.FC<Props> = ({layers, mashSize}) => {
   //     fetchImage();
   // }, [])
 
-  let renderedLayers = layers.map((layer) =>{
+  let renderedLayers = () => layers.slice(0).reverse().map((layer) => {
     if (layer.type === "IMAGE_SEARCH") {
       let imgLayer = layer as ILayer;
       return (
@@ -40,7 +40,7 @@ const Mash: React.FC<Props> = ({layers, mashSize}) => {
         display: "inline-block",
       }}
     >
-      {renderedLayers}
+      {renderedLayers()}
     </div>
   );
 };

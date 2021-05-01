@@ -11,23 +11,23 @@ const initialLayers: { layers: ILayer[] } = {
 			type: 'IMAGE_SEARCH',
 			query: 'colorful rainbow',
 			mode: 'normal',
-			url: 'https://source.unsplash.com/random/?boobs',
+			url: '',
 			opacity: 100,
 			id: '1',
 		},
 		{
 			type: 'IMAGE_SEARCH',
 			query: 'lightning',
-			mode: 'difference',
+			mode: 'normal',
 			opacity: 50,
-			url: 'https://source.unsplash.com/random/?girls',
+			url: '',
 			id: '2',
 		},
 		{
 			type: 'IMAGE_SEARCH',
 			query: 'black',
-			mode: 'multiply',
-			opacity: 50,
+			mode: 'normal',
+			opacity: 30,
 			url: '',
 			id: '3',
 		},
@@ -59,9 +59,10 @@ function layerReducer(state: { layers: AbstractLayer[] }, action: LayersAction) 
 			};
 
 		case 'MOVE_LAYER':
-			const layer = state.layers.splice(action.payload.from, 1)[0];
-			state.layers.splice(action.payload.to, 0, layer);
-			return state;
+      let layersTemp = [...state.layers]
+			const layer = layersTemp.splice(action.payload.from, 1)[0];
+			layersTemp.splice(action.payload.to, 0, layer);
+			return {layers: layersTemp};
 
 		default:
 			return state;
@@ -85,20 +86,6 @@ const Editor = () => {
 	// 	}
 	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	// }, []);
-
-	const refreshURL = (layerID: string, query: string) => {
-		//TODO: set warning message on layer for bad request
-		//TODO: this should live inside a LayerMenu useEffect.
-
-		const fetchURL = async () => {
-			const response = await axios.get(
-				`https://source.unsplash.com/random/?${query.replaceAll(' ', '-')}`
-			);
-			//setLayerURL(layerID, response.request.responseURL);
-		};
-
-		fetchURL();
-	};
 
 	// const setLayerOpacity = (id: string, newOpacity: number) => {
 	// 	setLayers((prev) =>
