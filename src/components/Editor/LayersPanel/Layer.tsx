@@ -1,10 +1,21 @@
 import { useState } from "react";
+import { DraggableProvidedDraggableProps, DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
+import { ILayer } from "../../../types";
 import LayerMenu from './LayerMenu';
 
+interface Props {
+  draggableProps: DraggableProvidedDraggableProps;
+  dragHandleProps?: DraggableProvidedDragHandleProps;
+  innerRef: (element?: HTMLElement | null | undefined) => any;
+  layer: ILayer;
+  setOpacity: (amount: number) => void;
+  setURL: (url: string) => void;
+  deleteSelf: () => void;
+}
 
-
-const Layer = (props: any) => {
+const Layer: React.FC<Props> = ({layer, draggableProps, dragHandleProps, innerRef, setOpacity, setURL }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [query, setQuery] = useState(''); //TODO: initialize to random cool image
 
   const Handle = (props: any) => {
     return (
@@ -21,13 +32,13 @@ const Layer = (props: any) => {
   return (
     <div
       className="bg-muidark-4 mb-2 p-3 rounded-md w-72 shadow-lg no-flick"
-      ref={props.innerRef}
-      {...props.draggableProps}
+      ref={innerRef}
+      {...draggableProps}
     >
       <div className="flex flex-nowrap items-center w-full">
-        <Handle {...props.dragHandleProps} />
+        <Handle {...dragHandleProps} />
         <h1 className="text-white font-sans whitespace-nowrap">
-          {props.data.query}
+          {query}
         </h1>
         <span className="w-full justify-end flex">
           <img
@@ -40,12 +51,12 @@ const Layer = (props: any) => {
             className="cursor-pointer h-5 opacity-50 hover:opacity-100 ml-3"
             src="icons8-delete-26.png"
             alt="delete layer"
-            onClick={() => props.deleteSelf()}
+            onClick={() => {/* TODO: delete self */}}
           />
         </span>
       </div>
       <div className={`bg-muidark-4 transition-max-height overflow-hidden ${open ? "max-h-96" : "max-h-0"}`}>
-        {open ? <LayerMenu query={props.data.query} opacity={props.data.opacity} setQuery={props.setQuery} setOpacity={props.setOpacity} refreshURL={() => props.refreshURL(props.data.query)}/> : null}
+        {open ? <LayerMenu query={query} opacity={layer.opacity} setQuery={setQuery} setOpacity={setOpacity} setURL={setURL} /> : null}
       </div>
     </div>
   );

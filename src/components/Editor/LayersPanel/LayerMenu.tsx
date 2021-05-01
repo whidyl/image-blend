@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ImgSearchBox from './ImgSearchBox';
 
 interface Props {
@@ -6,13 +6,14 @@ interface Props {
   opacity: number;
   setQuery: (query: string) => void;
   setOpacity: (amount: number) => void;
-  refreshURL: () => void;
+  setURL: (url: string) => void;
 }
 
-const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, refreshURL}) => {
+const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, setURL}) => {
+
   return (
     <div className="h-auto flex flex-col flex-nowrap">
-      <ImgSearchBox query={query} setQuery={setQuery} refreshURL={refreshURL} />
+      <ImgSearchBox query={query} setQuery={setQuery} setURL={setURL} />
       <span className="mt-2 flex flex-row items-center">
         <label className="ml-1 mr-7 text-white text-sm font-medium">
           Effects:
