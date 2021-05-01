@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import ImgSearchBox from './ImgSearchBox';
+import Selector from './Selector';
 
 interface Props {
   query: string;
@@ -12,7 +13,7 @@ interface Props {
 const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, setURL}) => {
 
   return (
-    <div className="h-auto flex flex-col flex-nowrap">
+    <div className="h-auto flex flex-col flex-nowrap overflow-visible">
       <ImgSearchBox query={query} setQuery={setQuery} setURL={setURL} />
       <span className="mt-2 flex flex-row items-center">
         <label className="ml-1 mr-7 text-white text-sm font-medium">
@@ -78,6 +79,7 @@ const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, setURL
           </select>
         </div>
       </span>
+      <Selector options={["No effect", "Blur", "Brightness", "Contrast", "Grayscale", "Hue", "Invert", "Saturate"]}/>
       <span className="mt-2 flex flex-row items-center">
         <label className="ml-1 mr-6 text-white text-sm font-medium">
           Opacity:
@@ -92,6 +94,7 @@ const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, setURL
           onChange={e => setOpacity(parseInt(e.target.value))}
         />
       </span>
+      
     </div>
   );
 };

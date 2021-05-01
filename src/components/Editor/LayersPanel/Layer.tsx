@@ -55,7 +55,7 @@ const Layer: React.FC<Props> = ({layer, draggableProps, dragHandleProps, innerRe
           />
         </span>
       </div>
-      <div className={`bg-muidark-4 transition-max-height overflow-hidden ${open ? "max-h-96" : "max-h-0"}`}>
+      <div className={`bg-muidark-4 transition-max-height overflow-visible ${open ? "max-h-96" : "max-h-0"}`}>
         {open ? <LayerMenu query={query} opacity={layer.opacity} setQuery={setQuery} setOpacity={setOpacity} setURL={setURL} /> : null}
       </div>
     </div>
