@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect } from 'react';
 import { useRef, useState } from 'react';
 import {
@@ -6,18 +7,7 @@ import {
 } from 'react-beautiful-dnd';
 import { ILayer } from '../../../types';
 import LayerMenu from './LayerMenu';
-
-const goodSearchTerms = ['fire', 'lightning', 'rapper', 'explosion', 'abstract', 'painting', 'portrait', 'aesthetic',
-'rainbow', 'colorful', 'texture', 'landscape', 'trees', 'nature texture', 'fire-texture', 'crowd',
-'architecture', 'industrial', 'fractal', 'aesthetic texture', 'stunning space', 'psychedelic',
-'abstract dark', 'wallpaper', 'light streaks', 'gradient', 'overlay texture', 'sunset', 'sky',
-'water texture', 'statue', 'urban', 'floral',
-'streetwear', 'wildlife', 'cyberpunk', 'night city', 'liquid', 'fireworks', 'galaxy', 'spider web',
-'pattern', 'fabric', 'microscopic', 'stars', 'jellyfish', 'optical illusion', 'lightning storm',
-'waterfall', 'grunge', 'incredible view', 'festival night', 'fire breather', 'iridescent sky',
-'abstract wallpaper', 'ice', 'fractal patterns', 'flower', 'bikini', 'earth', 'shark',
-'reptile eye', 'bokeh', 'light show', 'drawing', 'black and white',
-'purple', 'white', 'black']
+import { randomGoodTerm } from '../../../utilities'
 
 interface Props {
 	draggableProps: DraggableProvidedDraggableProps;
@@ -44,9 +34,17 @@ const Layer: React.FC<Props> = ({
   setEffectAmount,
   deleteSelf,
 }) => {
-	const [open, setOpen] = useState<boolean>(true);
-	const [query, setQuery] = useState(goodSearchTerms[Math.floor(goodSearchTerms.length*Math.random())]); //TODO: initialize to random cool image
-  const needsURLRefresh = useRef(true);
+	const [open, setOpen] = useState<boolean>(false);
+	const [query, setQuery] = useState(randomGoodTerm()); //TODO: initialize to random cool image
+
+  const updateURL = async () => {
+		const response = await axios.get(
+			`https://source.unsplash.com/featured/?${query.replaceAll(' ', '-')}`
+		);
+		setURL(response.request.responseURL);
+  }
+
+  useEffect(() => {updateURL()}, []);
 
 	const Handle = (props: any) => {
 		return (
@@ -99,13 +97,12 @@ const Layer: React.FC<Props> = ({
 						opacity={layer.opacity}
             effect={layer.effect}
             effectAmount={layer.effectAmount}
-            needsURLRefresh={needsURLRefresh}
+            updateURL={updateURL}
 						setQuery={setQuery}
 						setOpacity={setOpacity}
 						setEffect={setEffect}
             setMode={setMode}
             setEffectAmount={setEffectAmount}
-						setURL={setURL}
 					/>
 				) : null}
 			</div>

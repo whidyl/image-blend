@@ -29,5 +29,6 @@ export type LayersAction =
   | { type: 'DELETE_LAYER'; payload: { id: string } }
   | { type: 'SHUFFLE_ALL' }
   | { type: 'RANDOM_EFFECTS' }
+  | { type: 'RANDOM_MODES' }
   | { type: 'RANDOM_TERMS' };
   

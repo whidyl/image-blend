@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { randomMode } from "../../utilities";
 //TODO: export via codepen API
 //TODO: load examples
 
@@ -90,9 +91,11 @@ const TBDropdown: React.FC = () => {
 interface Props {
   mashSize: { width?: number, height?: number};
   setMashSize: (newState: {width?: number, height?: number}) => void;
+  randomizeModes: () => void;
+  randomizeEffects: () => void;
 }
 
-const Toolbar: React.FC<Props> = ({ mashSize, setMashSize }) => {
+const Toolbar: React.FC<Props> = ({ mashSize, setMashSize, randomizeModes, randomizeEffects }) => {
   return (
     <div className="flex justify-evenly flex-shrink">
       <div className="p-3 mt-4 mr-4 w-full max-w-screen-lg bg-muidark-2 rounded-md flex items-center justify-around">
@@ -125,9 +128,8 @@ const Toolbar: React.FC<Props> = ({ mashSize, setMashSize }) => {
           Randomize:
         </label>
 
-        <button className="px-4 py-2 ml-1 mr-1 basic-clickable"> Terms </button>
-        <button className="px-4 py-2 ml-1 mr-1 basic-clickable"> Blending </button>
-        <button className="px-4 py-2 ml-1 mr-1 basic-clickable"> Effects </button>
+        <button className="px-4 py-2 ml-1 mr-1 basic-clickable" onClick={() => randomizeModes()}> Modes </button>
+        <button className="px-4 py-2 ml-1 mr-1 basic-clickable" onClick={() => randomizeEffects()}> Effects </button>
 
         <h1 className="mr-1 ml-1 text-white opacity-20">|</h1>
 

@@ -8,13 +8,12 @@ interface Props {
   opacity: number;
   effect: string;
   effectAmount: number;
-  needsURLRefresh: MutableRefObject<boolean>;
+  updateURL: () => void;
   setQuery: (query: string) => void;
   setOpacity: (amount: number) => void;
   setMode: (mode: string) => void
   setEffect: (effect: string) => void;
   setEffectAmount: (effectAmount: number) => void;
-  setURL: (url: string) => void;
 }
 
 const effectOptions = [
@@ -119,11 +118,11 @@ const blendingOptions = [
   },
 ]
 
-const LayerMenu:React.FC<Props> = ({query, opacity, effect, effectAmount, needsURLRefresh, setOpacity, setQuery, setMode, setEffect, setEffectAmount, setURL}) => {
+const LayerMenu:React.FC<Props> = ({query, opacity, effect, effectAmount, setOpacity, setQuery, setMode, setEffect, setEffectAmount, updateURL}) => {
 
   return (
     <div className="h-auto flex flex-col flex-nowrap overflow-visible">
-      <ImgSearchBox query={query} setQuery={setQuery} needsRefresh={needsURLRefresh} setURL={setURL} />
+      <ImgSearchBox query={query} setQuery={setQuery} updateURL={updateURL} />
       <Selector label="Modes" options={blendingOptions} onSelectChange={(val) => setMode(val)} />
       <Selector label="Effects" options={effectOptions} onSelectChange={(val) => setEffect(val)}/>
       {effect !== "none" ? <Slider val={effectAmount} setVal={setEffectAmount} classNames="ml-20 mt-2 mr-2" /> : null}

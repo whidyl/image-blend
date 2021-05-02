@@ -1,9 +1,10 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useReducer } from 'react';
 import LayersPanel from './LayersPanel/LayersPanel';
 import Mash from '../Mash/Mash';
 import Toolbar from './Toolbar';
 import { AbstractLayer, ILayer, LayersAction } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
+import { randomEffect, randomMode } from '../../utilities'
 
 //TODO : useLayers hook
 //TODO : duplicate layer
@@ -117,7 +118,6 @@ function layerReducer(
 					
 					{
 						type: 'IMAGE_SEARCH',
-						query: "",
 						mode: 'normal',
 						effect: 'none',
 						effectAmount: 75,
@@ -127,6 +127,16 @@ function layerReducer(
 					}, ...state.layers
 				],
 			};
+
+		case 'RANDOM_MODES':
+			return {
+				layers: [...state.layers].map(layer => ({...layer, mode: randomMode()}))
+			}
+		
+		case 'RANDOM_EFFECTS':
+			return {
+				layers: [...state.layers].map(layer => ({...layer, effect: randomEffect()}))
+			}
 
 		default:
 			return state;
@@ -149,7 +159,7 @@ const Editor = () => {
 				</div>
 				<div className="h-full w-full flex flex-col ">
 					<div className="h-24 bg-muidark flex-initial z-10 ">
-						<Toolbar mashSize={mashSize} setMashSize={setMashSize} />
+						<Toolbar mashSize={mashSize} setMashSize={setMashSize} randomizeModes={() => layersDispatch({type: "RANDOM_MODES"})} randomizeEffects={() => layersDispatch({type: "RANDOM_EFFECTS"})}/>
 					</div>
 					<div className="p-20 bg-muidark relative flex-auto flex items-center justify-center z-0 overflow-y-auto overflow-x-auto">
 						<Mash layers={layers} mashSize={mashSize} />

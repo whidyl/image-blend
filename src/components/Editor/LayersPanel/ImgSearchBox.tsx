@@ -3,21 +3,14 @@ import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 interface Props {
 	query: string;
-	needsRefresh: MutableRefObject<boolean>;
 	setQuery: (query: string) => void;
-	setURL: (url: string) => void;
+	updateURL: () => void;
 }
 
-const ImgSearchBox: React.FC<Props> = ({ query, needsRefresh, setQuery, setURL }) => {
+const ImgSearchBox: React.FC<Props> = ({ query, setQuery, updateURL}) => {
 	const [disableRefresh, setDisableRefresh] = useState(false);
 	let didMount = useRef(false);
 
-    const updateURL = async () => {
-		const response = await axios.get(
-			`https://source.unsplash.com/random/?${query.replaceAll(' ', '-')}`
-		);
-		setURL(response.request.responseURL);
-    }
 
 	useEffect(() => {
 		// don't issue refresh on first render, the search box is remade every time the window is collapsed.
@@ -31,11 +24,6 @@ const ImgSearchBox: React.FC<Props> = ({ query, needsRefresh, setQuery, setURL }
 				clearTimeout(timeoutID);
 			};
 		}
-
-		if (needsRefresh.current) {
-			updateURL();
-			needsRefresh.current = false;
-		} 
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query]);
