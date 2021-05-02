@@ -10,6 +10,41 @@ interface Props {
   setURL: (url: string) => void;
 }
 
+const effectOptions = [
+  {
+    label: "None",
+    value: "none"
+  },
+  {
+    label: "Blur",
+    value: "blur"
+  },
+  {
+    label: "Brightness",
+    value: "brightness"
+  },
+  {
+    label: "Contrast",
+    value: "contrast"
+  },
+  {
+    label: "Grayscale",
+    value: "grayscale"
+  },
+  {
+    label: "Hue",
+    value: "hue-rotate"
+  },
+  {
+    label: "Invert",
+    value: "invert"
+  },
+  {
+    label: "Saturation",
+    value: "saturate"
+  },
+]
+
 const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, setURL}) => {
 
   return (
@@ -79,7 +114,7 @@ const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, setURL
           </select>
         </div>
       </span>
-      <Selector options={["No effect", "Blur", "Brightness", "Contrast", "Grayscale", "Hue", "Invert", "Saturate"]}/>
+      <Selector options={effectOptions}/>
       <span className="mt-2 flex flex-row items-center">
         <label className="ml-1 mr-6 text-white text-sm font-medium">
           Opacity:

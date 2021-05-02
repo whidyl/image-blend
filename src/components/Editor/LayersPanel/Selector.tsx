@@ -1,75 +1,48 @@
 import React, { useState } from 'react';
 
 interface Props {
-	options: string[];
+	options: { label: string; value: string }[];
 }
+
+const CheckMark = () => (
+	<span className="text-white absolute inset-y-0 right-0 flex items-center pr-4">
+		<svg
+			className="h-5 w-5"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 20 20"
+			fill="currentColor"
+			aria-hidden="true"
+		>
+			<path
+				fill-rule="evenodd"
+				d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+				clip-rule="evenodd"
+			/>
+		</svg>
+	</span>
+);
 
 const Selector: React.FC<Props> = ({ options }) => {
 	const [open, setOpen] = useState(false);
-
-	const Options = () => (
-		<>
-			{options.map((option) => (
-				<>
-					<div className="flex items-center">
-						<span className="font-normal ml-3 block truncate">{option}</span>
-					</div>
-					<span className="text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4">
-						<svg
-							className="h-5 w-5"
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								fill-rule="evenodd"
-								d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-								clip-rule="evenodd"
-							/>
-						</svg>
-					</span>
-				</>
-			))}
-		</>
-	);
-
-	const DropdownContent = () => (
-		<>
-			<ul
-				className="absolute z-20 mt-1 w-44 right-1 bg-white shadow-lg max-h-24 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-				tabIndex={-1}
-				role="listbox"
-				aria-labelledby="listbox-label"
-				aria-activedescendant="listbox-option-3"
-			>
-				<li
-					className="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9"
-					id="listbox-option-0"
-					role="option"
-				>
-					<Options />
-				</li>
-			</ul>
-		</>
-	);
+	const [selected, setSelected] = useState('none');
+	const [previewing, setPreviewing] = useState('none');
 
 	return (
 		<div>
 			<div className="mt-1 relative">
-				<label className="mr-8">Effect: </label>
+				<label className="ml-1 mr-8 text-white text-sm font-medium">
+					Effect:{' '}
+				</label>
 				<button
 					type="button"
-					className="relative w-44 bg-muidark-2 border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+					className="relative w-44 bg-muidark-2 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default default-focus-ring sm:text-sm"
 					aria-haspopup="listbox"
 					aria-expanded="true"
 					aria-labelledby="listbox-label"
 					onClick={() => setOpen(!open)}
 				>
 					<span className="flex items-center">
-						<span className="ml-3 block truncate text-sm text-white">
-							Tom Cook
-						</span>
+						<span className="block truncate text-sm text-white">Tom Cook</span>
 					</span>
 					<span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 						<svg
@@ -88,7 +61,45 @@ const Selector: React.FC<Props> = ({ options }) => {
 					</span>
 				</button>
 
-				{open ? <DropdownContent /> : null}
+				{open ? (
+					<>
+						<ul
+							className="absolute z-20 mt-1 w-44 right-1 bg-muidark-2 shadow-lg max-h-32 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto sm:text-sm"
+							tabIndex={-1}
+							role="listbox"
+							aria-labelledby="listbox-label"
+							aria-activedescendant="listbox-option-3"
+						>
+							<>
+								{options.map(({ label, value }) => (
+									<li
+										key={label}
+										className="text-white cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-muidark-5"
+										id="listbox-option-0"
+										role="option"
+										onClick={() => {
+											setSelected(value);
+											setOpen(false);
+										}}
+										onMouseOver={(e) => {
+											e.preventDefault();
+											setPreviewing(value);
+										}}
+									>
+										{/* TODO: preview on mouse hover */}
+										<div className="flex items-center">
+											<span className="font-normal ml-3 block truncate">
+												{label}
+											</span>
+										</div>
+
+										{selected === value ? <CheckMark /> : null}
+									</li>
+								))}
+							</>
+						</ul>
+					</>
+				) : null}
 			</div>
 		</div>
 	);

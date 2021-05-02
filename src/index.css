@@ -3,53 +3,61 @@
 @tailwind utilities;
 
 @layer base {
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    }
+	input[type='number']::-webkit-outer-spin-button,
+	input[type='number']::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
 
-    input[type="number"] {
-    -moz-appearance: textfield;
-    }
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
 
-    .max-h-l-stack {
-    max-height: calc(100% - 24px);
-    }
+	.h-l-stack {
+		height: calc(100% - 30px);
+	}
 
-    div::-webkit-scrollbar {
-    background-color: #262626;
-    }
+	div::-webkit-scrollbar {
+		background-color: #262626;
+	}
 
-    div::-webkit-scrollbar-thumb {
-    background-color: #404040;
-    border-radius: 12px;
-    }
+	div::-webkit-scrollbar-thumb {
+		background-color: #404040;
+		border-radius: 12px;
+	}
 
-    /* .no-flick {-webkit-transform:translate3d(0,0,0); -webkit-transform-style: preserve-3d; -webkit-backface-visibility: hidden;} */
+	ul::-webkit-scrollbar {
+		background-color: #262626;
+        width: 10px;
+	}
+
+	ul::-webkit-scrollbar-thumb {
+		background-color: #404040;
+		border-radius: 12px;
+	}
+
+	/* .no-flick {-webkit-transform:translate3d(0,0,0); -webkit-transform-style: preserve-3d; -webkit-backface-visibility: hidden;} */
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    input[type="range"]::-webkit-slider-thumb {
-        width: 15px;
-        -webkit-appearance: none;
-          appearance: none;
-        height: 15px;
-        cursor: pointer;
-        background: #818181;
-        box-shadow: -405px 0 0 400px #262626;
-        border-radius: 50%;
-    }
+	input[type='range']::-webkit-slider-thumb {
+		width: 15px;
+		-webkit-appearance: none;
+		appearance: none;
+		height: 15px;
+		cursor: pointer;
+		background: #818181;
+		box-shadow: -405px 0 0 400px #262626;
+		border-radius: 50%;
+	}
 }
-
 
 @layer components {
-    .basic-clickable {
-        @apply text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30;
-    }
+	.basic-clickable {
+		@apply text-white text-sm font-medium bg-muidark-4 rounded border-0 shadow-lg outline-none focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30;
+	}
 
-    .default-focus-ring {
-        @apply focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30;
-    }
+	.default-focus-ring {
+		@apply focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30;
+	}
 }
-

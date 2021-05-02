@@ -34,7 +34,10 @@ const initialLayers: { layers: ILayer[] } = {
 	],
 };
 
-function layerReducer(state: { layers: AbstractLayer[] }, action: LayersAction) {
+function layerReducer(
+	state: { layers: AbstractLayer[] },
+	action: LayersAction
+) {
 	switch (action.type) {
 		case 'UPDATE_LAYER_URL':
 			return {
@@ -59,10 +62,10 @@ function layerReducer(state: { layers: AbstractLayer[] }, action: LayersAction) 
 			};
 
 		case 'MOVE_LAYER':
-      let layersTemp = [...state.layers]
+			let layersTemp = [...state.layers];
 			const layer = layersTemp.splice(action.payload.from, 1)[0];
 			layersTemp.splice(action.payload.to, 0, layer);
-			return {layers: layersTemp};
+			return { layers: layersTemp };
 
 		default:
 			return state;
@@ -77,67 +80,11 @@ const Editor = () => {
 		{ width: 1000, height: 500 }
 	);
 
-	// useEffect(() => {
-	// 	for (const layer of layers) {
-	// 		if (layer.type === 'IMAGE_SEARCH') {
-	// 			const imgLayer = layer as ILayer;
-	// 			refreshURL(imgLayer.id, imgLayer.query);
-	// 		}
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, []);
-
-	// const setLayerOpacity = (id: string, newOpacity: number) => {
-	// 	setLayers((prev) =>
-	// 		prev.map((layer) => {
-	// 			if (layer.id === id) {
-	// 				return { ...layer, opacity: newOpacity };
-	// 			} else {
-	// 				return layer;
-	// 			}
-	// 		})
-	// 	);
-	// };
-
-	// const setLayerURL = (id: string, newURL: string) => {
-	// 	setLayers((prev) =>
-	// 		prev.map((layer) => {
-	// 			if (layer.id === id) {
-	// 				return { ...layer, url: newURL };
-	// 			} else {
-	// 				return layer;
-	// 			}
-	// 		})
-	// 	);
-	// };
-
-	// const setLayerQuery = (id: string, newQuery: string) => {
-	// 	setLayers((prev) =>
-	// 		prev.map((layer) => {
-	// 			if (layer.id === id) {
-	// 				return { ...layer, query: newQuery };
-	// 			} else {
-	// 				return layer;
-	// 			}
-	// 		})
-	// 	);
-	// };
-
-	// const moveLayer = (from: number, to: number) => {
-	// 	let layersTemp = [...layers];
-	// 	let layerTemp = layersTemp.splice(from, 1)[0];
-	// 	layersTemp.splice(to, 0, layerTemp);
-	// 	setLayers(layersTemp);
-	// };
-
 	return (
 		<div className="bg-muidark w-full h-screen">
 			<div className="flex h-full">
 				<div className="z-10 w-96 ">
-					<LayersPanel
-						layers={layers}
-            layersDispatch={layersDispatch}
-					/>
+					<LayersPanel layers={layers} layersDispatch={layersDispatch} />
 				</div>
 				<div className="h-full w-full flex flex-col ">
 					<div className="h-24 bg-muidark flex-initial z-10 ">
