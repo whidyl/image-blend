@@ -3,38 +3,38 @@ import LayersPanel from './LayersPanel/LayersPanel';
 import Mash from '../Mash/Mash';
 import Toolbar from './Toolbar';
 import { AbstractLayer, ILayer, LayersAction } from '../../types';
-import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 //TODO : useLayers hook
+//TODO : duplicate layer
+
+
 
 const initialLayers: { layers: ILayer[] } = {
 	layers: [
 		{
 			type: 'IMAGE_SEARCH',
-			query: 'colorful rainbow',
 			mode: 'normal',
 			effect: 'none',
-			effectAmount: 1,
+			effectAmount: 100,
 			url: '',
 			opacity: 100,
 			id: '1',
 		},
 		{
 			type: 'IMAGE_SEARCH',
-			query: 'lightning',
 			mode: 'normal',
 			effect: 'none',
-			effectAmount: 1,
+			effectAmount: 100,
 			opacity: 50,
 			url: '',
 			id: '2',
 		},
 		{
 			type: 'IMAGE_SEARCH',
-			query: 'black',
 			mode: 'normal',
 			effect: 'none',
-			effectAmount: 1,
+			effectAmount: 100,
 			opacity: 30,
 			url: '',
 			id: '3',
@@ -69,6 +69,17 @@ function layerReducer(
 				],
 			};
 
+		case 'UPDATE_LAYER_MODE':
+			return {
+				layers: [
+					...state.layers.map((layer) =>
+						layer.id === action.payload.id
+							? { ...layer, mode: action.payload.newMode }
+							: layer
+					),
+				],
+			};
+
 		case 'UPDATE_LAYER_EFFECT':
 			return {
 				layers: [
@@ -79,7 +90,7 @@ function layerReducer(
 					),
 				],
 			};
-		
+
 		case 'UPDATE_LAYER_EFFECT_AMOUNT':
 			return {
 				layers: [
@@ -97,6 +108,27 @@ function layerReducer(
 			layersTemp.splice(action.payload.to, 0, layer);
 			return { layers: layersTemp };
 
+		case 'DELETE_LAYER':
+			return {
+				layers: [...state.layers].filter((l) => l.id != action.payload.id),
+			};
+
+		case 'NEW_LAYER':
+			return {
+				layers: [
+					
+					{
+						type: 'IMAGE_SEARCH',
+						query: "",
+						mode: 'normal',
+						effect: 'none',
+						effectAmount: 75,
+						url: '',
+						opacity: 100,
+						id: uuidv4(),
+					}, ...state.layers
+				],
+			};
 
 		default:
 			return state;

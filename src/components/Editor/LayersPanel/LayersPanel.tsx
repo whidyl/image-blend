@@ -40,7 +40,7 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 				<div
 					className="bg-muidark-5 mb-2 mt-2 p-2 rounded-md w-72 flex justify-center opacity-30 hover:opacity-100 cursor-pointer"
 					onClick={() => {
-						//TODO: ADD_LAYER
+						layersDispatch({type: "NEW_LAYER"})
 					}}
 				>
 					<img
@@ -72,6 +72,9 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 												setURL={(url: string) =>
 													layersDispatch({ type: "UPDATE_LAYER_URL", payload: {id: layer.id, newURL: url} })
 												}
+												setMode={(mode: string) =>
+													layersDispatch({ type: "UPDATE_LAYER_MODE", payload: {id: layer.id, newMode: mode}})
+												}
 												setEffect={(effect: string) =>
 													layersDispatch({ type: "UPDATE_LAYER_EFFECT", payload: { id: layer.id, newEffect: effect }})
 												}
@@ -79,7 +82,7 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 													layersDispatch({ type: "UPDATE_LAYER_EFFECT_AMOUNT", payload: { id: layer.id, newAmount: effectAmount}})
 												}
 												deleteSelf={() => {
-													// TODO: delete dispatch
+													layersDispatch({ type: "DELETE_LAYER", payload: {id: layer.id}})
 												}}
 											/>
 										)}

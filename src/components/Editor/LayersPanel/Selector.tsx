@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 interface Props {
+	className?: string;
+	label: string;
 	options: { label: string; value: string }[];
 	onSelectChange: ( val: string ) => void;
 }
@@ -23,7 +25,7 @@ const CheckMark = () => (
 	</span>
 );
 
-const Selector: React.FC<Props> = ({ options, onSelectChange }) => {
+const Selector: React.FC<Props> = ({className, label, options, onSelectChange }) => {
 	const [open, setOpen] = useState(false);
 	const [selected, setSelected] = useState({label: 'None', value: 'none'});
 
@@ -31,7 +33,7 @@ const Selector: React.FC<Props> = ({ options, onSelectChange }) => {
 		<div>
 			<div className="mt-1 relative">
 				<label className="ml-1 mr-8 text-white text-sm font-medium">
-					Effect:
+					{label}:
 				</label>
 				<button
 					type="button"

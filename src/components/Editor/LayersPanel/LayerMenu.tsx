@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { MutableRefObject } from 'react'
 import ImgSearchBox from './ImgSearchBox';
 import Selector from './Selector';
 import Slider from './Slider';
@@ -8,8 +8,10 @@ interface Props {
   opacity: number;
   effect: string;
   effectAmount: number;
+  needsURLRefresh: MutableRefObject<boolean>;
   setQuery: (query: string) => void;
   setOpacity: (amount: number) => void;
+  setMode: (mode: string) => void
   setEffect: (effect: string) => void;
   setEffectAmount: (effectAmount: number) => void;
   setURL: (url: string) => void;
@@ -50,76 +52,80 @@ const effectOptions = [
   },
 ]
 
-const LayerMenu:React.FC<Props> = ({query, opacity, effect, effectAmount, setOpacity, setQuery, setEffect, setEffectAmount, setURL}) => {
+const blendingOptions = [
+  {
+    label: "Normal",
+    value: 'normal'
+  },
+  {
+    label: "Multiply",
+    value: "multiply"
+  },
+  {
+    label: "Screen",
+    value: "screen"
+  },
+  {
+    label: "Overlay",
+    value: "overlay"
+  },
+  {
+    label: "Darken",
+    value: "darken"
+  },
+  {
+    label: "Lighten",
+    value: "lighten"
+  },
+  {
+    label: "Color Dodge",
+    value: "color-dodge"
+  },
+  {
+    label: "Color Burn",
+    value: "color-burn"
+  },
+  {
+    label: "Hard Light",
+    value: "hard-light"
+  },
+  {
+    label: "Soft Light",
+    value: "soft-light"
+  },
+  {
+    label: "Difference",
+    value: "difference"
+  },
+  {
+    label: "Exclusion",
+    value: "exclusion"
+  },
+  {
+    label: "Hue",
+    value: "hue"
+  },
+  {
+    label: "Saturation",
+    value: "saturation"
+  },
+  {
+    label: "Color",
+    value: "color"
+  },
+  {
+    label: "Luminosity",
+    value: "luminosity"
+  },
+]
+
+const LayerMenu:React.FC<Props> = ({query, opacity, effect, effectAmount, needsURLRefresh, setOpacity, setQuery, setMode, setEffect, setEffectAmount, setURL}) => {
 
   return (
     <div className="h-auto flex flex-col flex-nowrap overflow-visible">
-      <ImgSearchBox query={query} setQuery={setQuery} setURL={setURL} />
-      <span className="mt-2 flex flex-row items-center">
-        <label className="ml-1 mr-7 text-white text-sm font-medium">
-          Effects:
-        </label>
-        <div className="relative flex">
-          <svg
-            className="w-2 h-2 m-4 absolute top-0 right-0 pointer-events-none"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 412 232"
-          >
-            <path
-              d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-              fill="#818181"
-              fill-rule="nonzero"
-            />
-          </svg>
-          <select className="h-8 pl-2 pr-1 pt-1 w-44 rounded-md text-sm text-white font-medium text-opacity-30 bg-muidark-2 focus:outline-none appearance-none">
-            <option>No effect</option>
-            <option>Blur</option>
-            <option>Brightness</option>
-            <option>Contrast</option>
-            <option>Grayscale</option>
-            <option>Hue</option>
-            <option>Invert</option>
-            <option>Saturate</option>
-          </select>
-        </div>
-      </span>
-      <span className="mt-3 flex flex-row items-center">
-        <label className="ml-1 mr-4 text-white text-sm font-medium">
-          Blending:
-        </label>
-        <div className="relative flex">
-          <svg
-            className="w-2 h-2 m-4 absolute top-0 right-0 pointer-events-none"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 412 232"
-          >
-            <path
-              d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-              fill="#818181"
-              fill-rule="nonzero"
-            />
-          </svg>
-          <select className="h-8 pl-2 pr-1 pt-1 w-44 rounded-md text-sm text-white font-medium text-opacity-30 bg-muidark-2 focus:outline-none appearance-none">
-            <option>Normal</option>
-            <option>Multiply</option>
-            <option>Screen</option>
-            <option>Overlay</option>
-            <option>Darken</option>
-            <option>Lighten</option>
-            <option>Color Dodge</option>
-            <option>Color Burn</option>
-            <option>Hard Light</option>
-            <option>Soft Light</option>
-            <option>Difference</option>
-            <option>Exclusion</option>
-            <option>Hue</option>
-            <option>Saturation</option>
-            <option>Color</option>
-            <option>Luminosity</option>
-          </select>
-        </div>
-      </span>
-      <Selector options={effectOptions} onSelectChange={(val) => setEffect(val)}/>
+      <ImgSearchBox query={query} setQuery={setQuery} needsRefresh={needsURLRefresh} setURL={setURL} />
+      <Selector label="Modes" options={blendingOptions} onSelectChange={(val) => setMode(val)} />
+      <Selector label="Effects" options={effectOptions} onSelectChange={(val) => setEffect(val)}/>
       {effect !== "none" ? <Slider val={effectAmount} setVal={setEffectAmount} classNames="ml-20 mt-2 mr-2" /> : null}
       <span className="mt-2 flex flex-row items-center">
         <label className="ml-1 mr-6 text-white text-sm font-medium">

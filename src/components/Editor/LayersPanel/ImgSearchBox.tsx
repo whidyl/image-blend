@@ -1,13 +1,14 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 interface Props {
 	query: string;
+	needsRefresh: MutableRefObject<boolean>;
 	setQuery: (query: string) => void;
 	setURL: (url: string) => void;
 }
 
-const ImgSearchBox: React.FC<Props> = ({ query, setQuery, setURL }) => {
+const ImgSearchBox: React.FC<Props> = ({ query, needsRefresh, setQuery, setURL }) => {
 	const [disableRefresh, setDisableRefresh] = useState(false);
 	let didMount = useRef(false);
 
@@ -22,6 +23,7 @@ const ImgSearchBox: React.FC<Props> = ({ query, setQuery, setURL }) => {
 		// don't issue refresh on first render, the search box is remade every time the window is collapsed.
 		if (!didMount.current) {
 			didMount.current = true;
+			
 		} else {
 			const timeoutID = setTimeout(updateURL, 1000);
 
@@ -29,6 +31,11 @@ const ImgSearchBox: React.FC<Props> = ({ query, setQuery, setURL }) => {
 				clearTimeout(timeoutID);
 			};
 		}
+
+		if (needsRefresh.current) {
+			updateURL();
+			needsRefresh.current = false;
+		} 
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query]);

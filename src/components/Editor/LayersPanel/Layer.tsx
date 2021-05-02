@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef, useState } from 'react';
 import {
 	DraggableProvidedDraggableProps,
 	DraggableProvidedDragHandleProps,
 } from 'react-beautiful-dnd';
 import { ILayer } from '../../../types';
 import LayerMenu from './LayerMenu';
+
+const goodSearchTerms = ['fire', 'lightning', 'rapper', 'explosion', 'abstract', 'painting', 'portrait', 'aesthetic',
+'rainbow', 'colorful', 'texture', 'landscape', 'trees', 'nature texture', 'fire-texture', 'crowd',
+'architecture', 'industrial', 'fractal', 'aesthetic texture', 'stunning space', 'psychedelic',
+'abstract dark', 'wallpaper', 'light streaks', 'gradient', 'overlay texture', 'sunset', 'sky',
+'water texture', 'statue', 'urban', 'floral',
+'streetwear', 'wildlife', 'cyberpunk', 'night city', 'liquid', 'fireworks', 'galaxy', 'spider web',
+'pattern', 'fabric', 'microscopic', 'stars', 'jellyfish', 'optical illusion', 'lightning storm',
+'waterfall', 'grunge', 'incredible view', 'festival night', 'fire breather', 'iridescent sky',
+'abstract wallpaper', 'ice', 'fractal patterns', 'flower', 'bikini', 'earth', 'shark',
+'reptile eye', 'bokeh', 'light show', 'drawing', 'black and white',
+'purple', 'white', 'black']
 
 interface Props {
 	draggableProps: DraggableProvidedDraggableProps;
@@ -13,6 +26,7 @@ interface Props {
 	layer: ILayer;
 	setOpacity: (amount: number) => void;
 	setURL: (url: string) => void;
+  setMode: (mode: string) => void
 	setEffect: (effect: string) => void;
   setEffectAmount: (effectAmount: number) => void
 	deleteSelf: () => void;
@@ -24,12 +38,15 @@ const Layer: React.FC<Props> = ({
 	dragHandleProps,
 	innerRef,
 	setOpacity,
+  setMode,
 	setEffect,
 	setURL,
   setEffectAmount,
+  deleteSelf,
 }) => {
-	const [open, setOpen] = useState<boolean>(false);
-	const [query, setQuery] = useState(''); //TODO: initialize to random cool image
+	const [open, setOpen] = useState<boolean>(true);
+	const [query, setQuery] = useState(goodSearchTerms[Math.floor(goodSearchTerms.length*Math.random())]); //TODO: initialize to random cool image
+  const needsURLRefresh = useRef(true);
 
 	const Handle = (props: any) => {
 		return (
@@ -66,7 +83,7 @@ const Layer: React.FC<Props> = ({
 						src="icons8-delete-26.png"
 						alt="delete layer"
 						onClick={() => {
-							/* TODO: delete self */
+							deleteSelf()
 						}}
 					/>
 				</span>
@@ -82,9 +99,11 @@ const Layer: React.FC<Props> = ({
 						opacity={layer.opacity}
             effect={layer.effect}
             effectAmount={layer.effectAmount}
+            needsURLRefresh={needsURLRefresh}
 						setQuery={setQuery}
 						setOpacity={setOpacity}
 						setEffect={setEffect}
+            setMode={setMode}
             setEffectAmount={setEffectAmount}
 						setURL={setURL}
 					/>

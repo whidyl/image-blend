@@ -3,7 +3,7 @@ import CSS from 'csstype';
 
 interface Props {
   url: string;
-  blendMode: CSS.Property.MixBlendMode;
+  blendMode: string;
   effect: string;
   effectAmount: number;
   opacity: number;
@@ -42,7 +42,7 @@ const ImageLayer: React.FC<Props> = ({ url, blendMode, opacity, animate, duratio
         position: "inherit",
         opacity: `${opacity}%`,
         filter: `${effectStr()}`,
-        mixBlendMode: blendMode,
+        mixBlendMode: blendMode as CSS.Property.MixBlendMode,
         animation: animate
           ? `${animate} ${duration ? duration : 3}s infinite`
           : "none",
