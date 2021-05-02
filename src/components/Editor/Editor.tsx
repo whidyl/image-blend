@@ -8,8 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 //TODO : useLayers hook
 //TODO : duplicate layer
 
-
-
 const initialLayers: { layers: ILayer[] } = {
 	layers: [
 		{
