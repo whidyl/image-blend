@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react'
 import ImgSearchBox from './ImgSearchBox';
 import Selector from './Selector';
+import Slider from './Slider';
 
 interface Props {
   query: string;
   opacity: number;
+  effect: string;
+  effectAmount: number;
   setQuery: (query: string) => void;
   setOpacity: (amount: number) => void;
+  setEffect: (effect: string) => void;
+  setEffectAmount: (effectAmount: number) => void;
   setURL: (url: string) => void;
 }
 
@@ -45,7 +50,7 @@ const effectOptions = [
   },
 ]
 
-const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, setURL}) => {
+const LayerMenu:React.FC<Props> = ({query, opacity, effect, effectAmount, setOpacity, setQuery, setEffect, setEffectAmount, setURL}) => {
 
   return (
     <div className="h-auto flex flex-col flex-nowrap overflow-visible">
@@ -114,20 +119,13 @@ const LayerMenu:React.FC<Props> = ({query, opacity, setOpacity, setQuery, setURL
           </select>
         </div>
       </span>
-      <Selector options={effectOptions}/>
+      <Selector options={effectOptions} onSelectChange={(val) => setEffect(val)}/>
+      {effect !== "none" ? <Slider val={effectAmount} setVal={setEffectAmount} classNames="ml-20 mt-2 mr-2" /> : null}
       <span className="mt-2 flex flex-row items-center">
         <label className="ml-1 mr-6 text-white text-sm font-medium">
           Opacity:
         </label>
-        <input
-          className="mr-1 rounded-lg overflow-hidden appearance-none bg-muidark-2 h-3 w-auto flex-grow"
-          type="range"
-          min="1"
-          max="100"
-          step="1"
-          value={opacity}
-          onChange={e => setOpacity(parseInt(e.target.value))}
-        />
+        <Slider val={opacity} setVal={setOpacity}/>
       </span>
       
     </div>

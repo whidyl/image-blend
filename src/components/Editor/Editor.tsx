@@ -5,12 +5,16 @@ import Toolbar from './Toolbar';
 import { AbstractLayer, ILayer, LayersAction } from '../../types';
 import axios from 'axios';
 
+//TODO : useLayers hook
+
 const initialLayers: { layers: ILayer[] } = {
 	layers: [
 		{
 			type: 'IMAGE_SEARCH',
 			query: 'colorful rainbow',
 			mode: 'normal',
+			effect: 'none',
+			effectAmount: 1,
 			url: '',
 			opacity: 100,
 			id: '1',
@@ -19,6 +23,8 @@ const initialLayers: { layers: ILayer[] } = {
 			type: 'IMAGE_SEARCH',
 			query: 'lightning',
 			mode: 'normal',
+			effect: 'none',
+			effectAmount: 1,
 			opacity: 50,
 			url: '',
 			id: '2',
@@ -27,6 +33,8 @@ const initialLayers: { layers: ILayer[] } = {
 			type: 'IMAGE_SEARCH',
 			query: 'black',
 			mode: 'normal',
+			effect: 'none',
+			effectAmount: 1,
 			opacity: 30,
 			url: '',
 			id: '3',
@@ -61,11 +69,34 @@ function layerReducer(
 				],
 			};
 
+		case 'UPDATE_LAYER_EFFECT':
+			return {
+				layers: [
+					...state.layers.map((layer) =>
+						layer.id === action.payload.id
+							? { ...layer, effect: action.payload.newEffect }
+							: layer
+					),
+				],
+			};
+		
+		case 'UPDATE_LAYER_EFFECT_AMOUNT':
+			return {
+				layers: [
+					...state.layers.map((layer) =>
+						layer.id === action.payload.id
+							? { ...layer, effectAmount: action.payload.newAmount }
+							: layer
+					),
+				],
+			};
+
 		case 'MOVE_LAYER':
 			let layersTemp = [...state.layers];
 			const layer = layersTemp.splice(action.payload.from, 1)[0];
 			layersTemp.splice(action.payload.to, 0, layer);
 			return { layers: layersTemp };
+
 
 		default:
 			return state;

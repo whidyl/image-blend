@@ -24,7 +24,7 @@ const Mash: React.FC<Props> = ({layers, mashSize}) => {
     if (layer.type === "IMAGE_SEARCH") {
       let imgLayer = layer as ILayer;
       return (
-        <ImageLayer key={imgLayer.id} blendMode={imgLayer.mode} opacity={imgLayer.opacity} url={imgLayer.url} />
+        <ImageLayer key={imgLayer.id} blendMode={imgLayer.mode} effect={imgLayer.effect} effectAmount={imgLayer.effectAmount} opacity={imgLayer.opacity} url={imgLayer.url} />
       );
     } else {
       return null;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 interface Props {
 	options: { label: string; value: string }[];
+	onSelectChange: ( val: string ) => void;
 }
 
 const CheckMark = () => (
@@ -22,16 +23,15 @@ const CheckMark = () => (
 	</span>
 );
 
-const Selector: React.FC<Props> = ({ options }) => {
+const Selector: React.FC<Props> = ({ options, onSelectChange }) => {
 	const [open, setOpen] = useState(false);
-	const [selected, setSelected] = useState('none');
-	const [previewing, setPreviewing] = useState('none');
+	const [selected, setSelected] = useState({label: 'None', value: 'none'});
 
 	return (
 		<div>
 			<div className="mt-1 relative">
 				<label className="ml-1 mr-8 text-white text-sm font-medium">
-					Effect:{' '}
+					Effect:
 				</label>
 				<button
 					type="button"
@@ -42,7 +42,7 @@ const Selector: React.FC<Props> = ({ options }) => {
 					onClick={() => setOpen(!open)}
 				>
 					<span className="flex items-center">
-						<span className="block truncate text-sm text-white">Tom Cook</span>
+						<span className="block truncate text-sm text-white">{selected.label}</span>
 					</span>
 					<span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 						<svg
@@ -71,29 +71,32 @@ const Selector: React.FC<Props> = ({ options }) => {
 							aria-activedescendant="listbox-option-3"
 						>
 							<>
-								{options.map(({ label, value }) => (
+								{options.map(option => (
 									<li
-										key={label}
+										key={option.label}
 										className="text-white cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-muidark-5"
 										id="listbox-option-0"
 										role="option"
 										onClick={() => {
-											setSelected(value);
+											onSelectChange(option.value);
+											setSelected(option);
 											setOpen(false);
 										}}
 										onMouseOver={(e) => {
-											e.preventDefault();
-											setPreviewing(value);
+											onSelectChange(option.value);
+										}}
+										onMouseLeave={(e) => {
+											onSelectChange(selected.value);
 										}}
 									>
 										{/* TODO: preview on mouse hover */}
 										<div className="flex items-center">
 											<span className="font-normal ml-3 block truncate">
-												{label}
+												{option.label}
 											</span>
 										</div>
 
-										{selected === value ? <CheckMark /> : null}
+										{selected.value === option.value ? <CheckMark /> : null}
 									</li>
 								))}
 							</>

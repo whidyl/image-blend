@@ -72,6 +72,12 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 												setURL={(url: string) =>
 													layersDispatch({ type: "UPDATE_LAYER_URL", payload: {id: layer.id, newURL: url} })
 												}
+												setEffect={(effect: string) =>
+													layersDispatch({ type: "UPDATE_LAYER_EFFECT", payload: { id: layer.id, newEffect: effect }})
+												}
+												setEffectAmount={(effectAmount: number) =>
+													layersDispatch({ type: "UPDATE_LAYER_EFFECT_AMOUNT", payload: { id: layer.id, newAmount: effectAmount}})
+												}
 												deleteSelf={() => {
 													// TODO: delete dispatch
 												}}
