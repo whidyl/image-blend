@@ -101,6 +101,17 @@ function layerReducer(
 				],
 			};
 
+		case 'UPDATE_LAYER_ANIMATION':
+			return {
+				layers: [
+					...state.layers.map((layer) =>
+						layer.id === action.payload.id
+							? { ...layer, animation: action.payload.newAnimation }
+							: layer
+					),
+				],
+			};
+
 		case 'MOVE_LAYER':
 			let layersTemp = [...state.layers];
 			const layer = layersTemp.splice(action.payload.from, 1)[0];
@@ -109,7 +120,7 @@ function layerReducer(
 
 		case 'DELETE_LAYER':
 			return {
-				layers: [...state.layers].filter((l) => l.id != action.payload.id),
+				layers: [...state.layers].filter((l) => l.id !== action.payload.id),
 			};
 
 		case 'NEW_LAYER':
@@ -137,7 +148,7 @@ function layerReducer(
 			return {
 				layers: [...state.layers].map(layer => ({...layer, effect: randomEffect()}))
 			}
-
+		
 		default:
 			return state;
 	}

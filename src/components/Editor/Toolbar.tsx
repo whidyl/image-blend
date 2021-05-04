@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { randomMode } from "../../utilities";
 //TODO: export via codepen API
 //TODO: load examples
 

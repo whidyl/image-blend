@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch } from 'react';
 import Layer from './Layer';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { AbstractLayer, ILayer, LayersAction } from '../../../types';
@@ -74,6 +74,9 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 												}
 												setMode={(mode: string) =>
 													layersDispatch({ type: "UPDATE_LAYER_MODE", payload: {id: layer.id, newMode: mode}})
+												}
+												setAnimation={(animation: string) =>
+													layersDispatch({ type: "UPDATE_LAYER_ANIMATION", payload: { id: layer.id, newAnimation: animation}})
 												}
 												setEffect={(effect: string) =>
 													layersDispatch({ type: "UPDATE_LAYER_EFFECT", payload: { id: layer.id, newEffect: effect }})

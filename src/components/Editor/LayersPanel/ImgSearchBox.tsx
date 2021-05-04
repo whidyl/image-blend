@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 interface Props {
@@ -16,7 +15,6 @@ const ImgSearchBox: React.FC<Props> = ({ query, setQuery, updateURL}) => {
 		// don't issue refresh on first render, the search box is remade every time the window is collapsed.
 		if (!didMount.current) {
 			didMount.current = true;
-			
 		} else {
 			const timeoutID = setTimeout(updateURL, 1000);
 

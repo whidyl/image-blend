@@ -8,6 +8,7 @@ export interface ILayer extends AbstractLayer {
 	mode: string;
 	effect: string;
 	effectAmount: number;
+  animation?: string;
 	opacity: number;
 }
 
@@ -20,6 +21,7 @@ export type LayersAction =
 	| { type: 'UPDATE_LAYER_QUERY'; payload: { id: string; newQuery: string } }
 	| { type: 'UPDATE_LAYER_MODE'; payload: { id: string; newMode: string } }
 	| { type: 'UPDATE_LAYER_EFFECT'; payload: { id: string; newEffect: string } }
+	| { type: 'UPDATE_LAYER_ANIMATION'; payload: { id: string; newAnimation: string } }
 	| {
 			type: 'UPDATE_LAYER_EFFECT_AMOUNT';
 			payload: { id: string; newAmount: number };

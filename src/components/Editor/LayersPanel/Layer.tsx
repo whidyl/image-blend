@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import {
 	DraggableProvidedDraggableProps,
 	DraggableProvidedDragHandleProps,
@@ -16,7 +16,8 @@ interface Props {
 	layer: ILayer;
 	setOpacity: (amount: number) => void;
 	setURL: (url: string) => void;
-  setMode: (mode: string) => void
+  setMode: (mode: string) => void;
+  setAnimation: (animation: string) => void;
 	setEffect: (effect: string) => void;
   setEffectAmount: (effectAmount: number) => void
 	deleteSelf: () => void;
@@ -30,6 +31,7 @@ const Layer: React.FC<Props> = ({
 	setOpacity,
   setMode,
 	setEffect,
+  setAnimation,
 	setURL,
   setEffectAmount,
   deleteSelf,
@@ -101,6 +103,7 @@ const Layer: React.FC<Props> = ({
 						setQuery={setQuery}
 						setOpacity={setOpacity}
 						setEffect={setEffect}
+            setAnimation={setAnimation}
             setMode={setMode}
             setEffectAmount={setEffectAmount}
 					/>

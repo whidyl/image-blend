@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from 'react'
+import React from 'react'
 import ImgSearchBox from './ImgSearchBox';
 import Selector from './Selector';
 import Slider from './Slider';
@@ -13,6 +13,7 @@ interface Props {
   setOpacity: (amount: number) => void;
   setMode: (mode: string) => void
   setEffect: (effect: string) => void;
+  setAnimation: (animation: string) => void;
   setEffectAmount: (effectAmount: number) => void;
 }
 
@@ -118,13 +119,52 @@ const blendingOptions = [
   },
 ]
 
-const LayerMenu:React.FC<Props> = ({query, opacity, effect, effectAmount, setOpacity, setQuery, setMode, setEffect, setEffectAmount, updateURL}) => {
+const animationOptions = [
+  {
+    label: "None",
+    value: "none"
+  },
+  {
+    label: "Color Shift",
+    value: "hue"
+  },
+  {
+    label: "Fade in / Out",
+    value: "opacity"
+  },
+  {
+    label: "Spin",
+    value: "rotate"
+  },
+  {
+    label: "Saturation Pulse",
+    value: "saturate"
+  },
+
+  {
+    label: "Focus Pulse",
+    value: "blur"
+  },
+
+  {
+    label: "Contrast Pulse",
+    value: "contrast"
+  },
+
+  {
+    label: "Invert",
+    value: "invert"
+  },
+]
+
+const LayerMenu:React.FC<Props> = ({query, opacity, effect, effectAmount, setOpacity, setAnimation, setQuery, setMode, setEffect, setEffectAmount, updateURL}) => {
 
   return (
     <div className="h-auto flex flex-col flex-nowrap overflow-visible">
       <ImgSearchBox query={query} setQuery={setQuery} updateURL={updateURL} />
       <Selector label="Modes" options={blendingOptions} onSelectChange={(val) => setMode(val)} />
       <Selector label="Effects" options={effectOptions} onSelectChange={(val) => setEffect(val)}/>
+      <Selector label="Animate" options={animationOptions} onSelectChange={(val) => setAnimation(val)}/>
       {effect !== "none" ? <Slider val={effectAmount} setVal={setEffectAmount} classNames="ml-20 mt-2 mr-2" /> : null}
       <span className="mt-2 flex flex-row items-center">
         <label className="ml-1 mr-6 text-white text-sm font-medium">
