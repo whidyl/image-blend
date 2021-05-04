@@ -36,6 +36,16 @@
 		border-radius: 12px;
 	}
 
+	.toggle-checkbox:checked {
+		@apply: right-0 border-green-400;
+		right: 0;
+		border-color: #68D391;
+	  }
+	  .toggle-checkbox:checked + .toggle-label {
+		@apply: bg-green-400;
+		background-color: #68D391;
+	  }
+
 	/* .no-flick {-webkit-transform:translate3d(0,0,0); -webkit-transform-style: preserve-3d; -webkit-backface-visibility: hidden;} */
 }
 

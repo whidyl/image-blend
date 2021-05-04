@@ -7,7 +7,7 @@ import {
 } from 'react-beautiful-dnd';
 import { ILayer } from '../../../types';
 import LayerMenu from './LayerMenu';
-import { randomGoodTerm } from '../../../utilities'
+import { randomGoodTerm } from '../../../utilities';
 
 interface Props {
 	draggableProps: DraggableProvidedDraggableProps;
@@ -16,37 +16,30 @@ interface Props {
 	layer: ILayer;
 	setOpacity: (amount: number) => void;
 	setURL: (url: string) => void;
-  setMode: (mode: string) => void;
-  setAnimation: (animation: string) => void;
+	setMode: (mode: string) => void;
 	setEffect: (effect: string) => void;
-  setEffectAmount: (effectAmount: number) => void
+	toggleEffectAnimate: () => void
+	toggleOpacityAnimate: () => void
+	setOpacityDuration: (duration: number) => void
+	setEffectDuration: (duration: number) => void
+	setEffectAmount: (effectAmount: number) => void;
 	deleteSelf: () => void;
 }
 
-const Layer: React.FC<Props> = ({
-	layer,
-	draggableProps,
-	dragHandleProps,
-	innerRef,
-	setOpacity,
-  setMode,
-	setEffect,
-  setAnimation,
-	setURL,
-  setEffectAmount,
-  deleteSelf,
-}) => {
+const Layer: React.FC<Props> = (props) => {
 	const [open, setOpen] = useState<boolean>(false);
 	const [query, setQuery] = useState(randomGoodTerm()); //TODO: initialize to random cool image
 
-  const updateURL = async () => {
+	const updateURL = async () => {
 		const response = await axios.get(
 			`https://source.unsplash.com/featured/?${query.replaceAll(' ', '-')}`
 		);
-		setURL(response.request.responseURL);
-  }
+		props.setURL(response.request.responseURL);
+	};
 
-  useEffect(() => {updateURL()}, []);
+	useEffect(() => {
+		updateURL();
+	}, []);
 
 	const Handle = (props: any) => {
 		return (
@@ -63,11 +56,11 @@ const Layer: React.FC<Props> = ({
 	return (
 		<div
 			className="bg-muidark-4 mb-2 p-3 rounded-md w-72 shadow-lg no-flick"
-			ref={innerRef}
-			{...draggableProps}
+			ref={props.innerRef}
+			{...props.draggableProps}
 		>
 			<div className="flex flex-nowrap items-center w-full">
-				<Handle {...dragHandleProps} />
+				<Handle {...props.dragHandleProps} />
 				<h1 className="text-white font-sans whitespace-nowrap">{query}</h1>
 				<span className="w-full justify-end flex">
 					<img
@@ -83,7 +76,7 @@ const Layer: React.FC<Props> = ({
 						src="icons8-delete-26.png"
 						alt="delete layer"
 						onClick={() => {
-							deleteSelf()
+							props.deleteSelf();
 						}}
 					/>
 				</span>
@@ -96,16 +89,21 @@ const Layer: React.FC<Props> = ({
 				{open ? (
 					<LayerMenu
 						query={query}
-						opacity={layer.opacity}
-            effect={layer.effect}
-            effectAmount={layer.effectAmount}
-            updateURL={updateURL}
+						opacity={props.layer.opacity}
+						effect={props.layer.effect}
+						effectAmount={props.layer.effectAmount}
+						effectAnimate={props.layer.animateEffect}
+						effectDuration={props.layer.effectDuration}
+						updateURL={updateURL}
 						setQuery={setQuery}
-						setOpacity={setOpacity}
-						setEffect={setEffect}
-            setAnimation={setAnimation}
-            setMode={setMode}
-            setEffectAmount={setEffectAmount}
+						setOpacity={props.setOpacity}
+						toggleOpacityAnimate={props.toggleOpacityAnimate}
+						setOpacityDuration={props.setOpacityDuration}
+						setEffect={props.setEffect}
+						setMode={props.setMode}
+						setEffectAmount={props.setEffectAmount}
+						setEffectDuration={props.setEffectDuration}
+						toggleEffectAnimate={props.toggleEffectAnimate}
 					/>
 				) : null}
 			</div>

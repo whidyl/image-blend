@@ -1,51 +1,44 @@
 import React from "react";
 import CSS from 'csstype';
+import { ILayer } from "../../types";
 
 interface Props {
-  url: string;
-  blendMode: string;
-  effect: string;
-  effectAmount: number;
-  opacity: number;
-  animate?: string;
-  duration?: number;
+  layerData: ILayer;
 }
 
-const ImageLayer: React.FC<Props> = ({ url, blendMode, opacity, animate, duration, effect, effectAmount }) => {
+const ImageLayer: React.FC<Props> = ({ layerData }) => {
   const effectStr = () => {
-    switch (effect) {
+    switch (layerData.effect) {
       case 'none':
         return 'none'
       case 'blur':
-        return `blur(${effectAmount*0.1}px)`
+        return `blur(${layerData.effectAmount*0.1}px)`
       case 'brightness':
-        return `brightness(${effectAmount*2}%)`
+        return `brightness(${layerData.effectAmount*2}%)`
       case 'contrast':
-        return `contrast(${effectAmount*4}%)`
+        return `contrast(${layerData.effectAmount*4}%)`
       case 'hue-rotate':
-        return `hue-rotate(${effectAmount*(360/100)}deg)`
+        return `hue-rotate(${layerData.effectAmount*(360/100)}deg)`
       case 'saturate':
-        return `saturate(${effectAmount*10}%)`
+        return `saturate(${layerData.effectAmount*10}%)`
       default:
-        return `${effect}(${effectAmount}%)`
+        return `${layerData.effect}(${layerData.effectAmount}%)`
     }
   }
 
   return (
     <img
-      src={url}
+      src={layerData.url}
       alt="layer icon"
       style={{
         width: "100%",
         height: "100%",
         objectFit: "cover",
         position: "inherit",
-        opacity: `${opacity}%`,
+        opacity: `${layerData.opacity}%`,
         filter: `${effectStr()}`,
-        mixBlendMode: blendMode as CSS.Property.MixBlendMode,
-        animation: animate
-          ? `${animate} ${duration ? duration : 3}s infinite`
-          : "none",
+        mixBlendMode: layerData.mode as CSS.Property.MixBlendMode,
+        animation: layerData.animateEffect ? `${layerData.effect} ${layerData.effectDuration ? layerData.effectDuration : 3}s ease-in-out infinite` : "none",
       }}
     />
   );

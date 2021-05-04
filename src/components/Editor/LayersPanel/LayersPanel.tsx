@@ -66,21 +66,37 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 												dragHandleProps={provided.dragHandleProps}
 												innerRef={provided.innerRef}
 												layer={layers.find(l => l.id === layer.id) as ILayer}
-												setOpacity={(amount: number) =>
-													layersDispatch({ type: "UPDATE_LAYER_OPACITY", payload: { id: layer.id, newOpacity: amount } })
-												}
+											
 												setURL={(url: string) =>
 													layersDispatch({ type: "UPDATE_LAYER_URL", payload: {id: layer.id, newURL: url} })
 												}
 												setMode={(mode: string) =>
 													layersDispatch({ type: "UPDATE_LAYER_MODE", payload: {id: layer.id, newMode: mode}})
 												}
-												setAnimation={(animation: string) =>
-													layersDispatch({ type: "UPDATE_LAYER_ANIMATION", payload: { id: layer.id, newAnimation: animation}})
-												}
 												setEffect={(effect: string) =>
 													layersDispatch({ type: "UPDATE_LAYER_EFFECT", payload: { id: layer.id, newEffect: effect }})
 												}
+
+												toggleEffectAnimate={() =>
+													layersDispatch({ type: "TOGGLE_LAYER_EFFECT_ANIMATE", payload: { id: layer.id }})
+												}
+
+												setEffectDuration={(duration: number) =>
+													layersDispatch({ type: "UPDATE_LAYER_EFFECT_DURATION", payload: { id: layer.id, newDuration: duration}})
+												}
+
+												setOpacity={(amount: number) =>
+													layersDispatch({ type: "UPDATE_LAYER_OPACITY", payload: { id: layer.id, newOpacity: amount } })
+												}
+
+												toggleOpacityAnimate={() =>
+													layersDispatch({ type: "TOGGLE_LAYER_OPACITY_ANIMATE", payload: { id: layer.id } })
+												}
+
+												setOpacityDuration={(duration: number) =>
+													layersDispatch({ type: "UPDATE_LAYER_OPACITY_DURATION", payload: { id: layer.id, newDuration: duration } })
+												}
+
 												setEffectAmount={(effectAmount: number) =>
 													layersDispatch({ type: "UPDATE_LAYER_EFFECT_AMOUNT", payload: { id: layer.id, newAmount: effectAmount}})
 												}

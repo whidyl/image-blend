@@ -12,19 +12,11 @@ interface Props {
 
 const Mash: React.FC<Props> = ({layers, mashSize}) => {
 
-  // useEffect(() => {
-  //     const fetchImage = async () => {
-  //         const response = await axios.get("https://source.unsplash.com/random");
-  //         console.log(response.request.responseURL);
-  //     }
-  //     fetchImage();
-  // }, [])
-
   let renderedLayers = () => layers.slice(0).reverse().map((layer) => {
     if (layer.type === "IMAGE_SEARCH") {
       let imgLayer = layer as ILayer;
       return (
-        <ImageLayer key={imgLayer.id} blendMode={imgLayer.mode} effect={imgLayer.effect} effectAmount={imgLayer.effectAmount} opacity={imgLayer.opacity} animate={imgLayer.animation} url={imgLayer.url} />
+        <ImageLayer key={imgLayer.id} layerData={imgLayer} />
       );
     } else {
       return null;

@@ -6,10 +6,15 @@ export interface AbstractLayer {
 export interface ILayer extends AbstractLayer {
 	url: string;
 	mode: string;
+
 	effect: string;
 	effectAmount: number;
-  animation?: string;
+    animateEffect: boolean;
+	effectDuration: number;
+
 	opacity: number;
+	animateOpacity: boolean;
+	opacityDuration: number;
 }
 
 export type LayersAction =
@@ -21,7 +26,10 @@ export type LayersAction =
 	| { type: 'UPDATE_LAYER_QUERY'; payload: { id: string; newQuery: string } }
 	| { type: 'UPDATE_LAYER_MODE'; payload: { id: string; newMode: string } }
 	| { type: 'UPDATE_LAYER_EFFECT'; payload: { id: string; newEffect: string } }
-	| { type: 'UPDATE_LAYER_ANIMATION'; payload: { id: string; newAnimation: string } }
+	| { type: 'TOGGLE_LAYER_EFFECT_ANIMATE'; payload: { id: string } }
+	| { type: 'UPDATE_LAYER_EFFECT_DURATION'; payload: { id: string; newDuration: number }}
+	| { type: 'TOGGLE_LAYER_OPACITY_ANIMATE'; payload: { id: string} }
+	| { type: 'UPDATE_LAYER_OPACITY_DURATION'; payload: { id: string; newDuration: number } }
 	| {
 			type: 'UPDATE_LAYER_EFFECT_AMOUNT';
 			payload: { id: string; newAmount: number };

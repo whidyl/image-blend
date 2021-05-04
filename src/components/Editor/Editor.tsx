@@ -12,31 +12,17 @@ import { randomEffect, randomMode } from '../../utilities'
 const initialLayers: { layers: ILayer[] } = {
 	layers: [
 		{
+			id: '1',
 			type: 'IMAGE_SEARCH',
 			mode: 'normal',
 			effect: 'none',
 			effectAmount: 100,
+			animateEffect: false,
+			effectDuration: 3,
 			url: '',
 			opacity: 100,
-			id: '1',
-		},
-		{
-			type: 'IMAGE_SEARCH',
-			mode: 'normal',
-			effect: 'none',
-			effectAmount: 100,
-			opacity: 50,
-			url: '',
-			id: '2',
-		},
-		{
-			type: 'IMAGE_SEARCH',
-			mode: 'normal',
-			effect: 'none',
-			effectAmount: 100,
-			opacity: 30,
-			url: '',
-			id: '3',
+			animateOpacity: false,
+			opacityDuration: 3,
 		},
 	],
 };
@@ -67,6 +53,28 @@ function layerReducer(
 					),
 				],
 			};
+		
+		case 'TOGGLE_LAYER_OPACITY_ANIMATE':
+			return {
+				layers: [
+					...(state.layers as ILayer[]).map((layer) =>
+						layer.id === action.payload.id
+							? { ...layer, animateOpacity: !layer.animateOpacity }
+							: layer
+					),
+				],
+			};
+		
+		case 'UPDATE_LAYER_OPACITY_DURATION':
+			return {
+				layers: [
+					...state.layers.map((layer) =>
+						layer.id === action.payload.id
+							? { ...layer, opacityDuration: action.payload.newDuration }
+							: layer
+					),
+				],
+			};
 
 		case 'UPDATE_LAYER_MODE':
 			return {
@@ -89,7 +97,7 @@ function layerReducer(
 					),
 				],
 			};
-
+		
 		case 'UPDATE_LAYER_EFFECT_AMOUNT':
 			return {
 				layers: [
@@ -101,12 +109,23 @@ function layerReducer(
 				],
 			};
 
-		case 'UPDATE_LAYER_ANIMATION':
+		case 'TOGGLE_LAYER_EFFECT_ANIMATE':
+			return {
+				layers: [
+					...(state.layers as ILayer[]).map((layer) =>
+						layer.id === action.payload.id
+							? { ...layer, animateEffect: !layer.animateEffect }
+							: layer
+					),
+				],
+			};
+		
+		case 'UPDATE_LAYER_EFFECT_DURATION':
 			return {
 				layers: [
 					...state.layers.map((layer) =>
 						layer.id === action.payload.id
-							? { ...layer, animation: action.payload.newAnimation }
+							? { ...layer, effectDuration: action.payload.newDuration }
 							: layer
 					),
 				],
@@ -155,7 +174,6 @@ function layerReducer(
 }
 
 const Editor = () => {
-	//const [layers, setLayers] = useState<AbstractLayer[]>(initialLayers);
 	const [{ layers }, layersDispatch] = useReducer(layerReducer, initialLayers);
 
 	const [mashSize, setMashSize] = useState<{ width?: number; height?: number }>(
