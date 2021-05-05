@@ -39,6 +39,7 @@ export type LayersAction =
   | { type: 'NEW_LAYER' }
   | { type: 'DUPLICATE_LAYER'; payload: { id: string, duplicatedQuery: string } }
   | { type: 'DELETE_LAYER'; payload: { id: string } }
+  | { type: 'DELETE_ALL' }
   | { type: 'SHUFFLE_ALL' }
   | { type: 'RANDOM_EFFECTS' }
   | { type: 'RANDOM_MODES' }

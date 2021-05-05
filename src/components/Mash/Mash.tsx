@@ -33,34 +33,7 @@ const Mash: React.FC<Props> = ({ layers, mashSize }) => {
 				display: 'inline-block',
         overflow: 'hidden'
 			}}
-		>
-			<svg id="svg-filter" width="0" height="0">
-				<defs>
-					<filter id="extruede">
-						<feMorphology
-							operator="extrude"
-							radius="3"
-							x="0%"
-							y="0%"
-							in="SourceGraphic"
-							result="morphology"
-						>
-						</feMorphology>
-					</filter>
-
-          <filter id="dilate">
-						<feMorphology
-							operator="dilate"
-							radius="3"
-							x="0%"
-							y="0%"
-							in="SourceGraphic"
-							result="morphology"
-						>
-						</feMorphology>
-					</filter>
-				</defs>
-			</svg>
+    >
 
 			{renderedLayers()}
 		</div>

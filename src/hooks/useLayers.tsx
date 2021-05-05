@@ -117,6 +117,9 @@ function layerReducer(
 			return {
 				layers: [...state.layers].filter((l) => l.id !== action.payload.id),
 			};
+        
+        case 'DELETE_ALL':
+            return {layers: []};
 
 		case 'NEW_LAYER':
 			return {
@@ -140,7 +143,7 @@ function layerReducer(
 		case 'DUPLICATE_LAYER':
 			let dupe = state.layers.find((l) => l.id === action.payload.id);
 			return {
-				layers: [...state.layers, { ...(dupe as AbstractLayer), id: uuidv4(), duplicatedQuery: action.payload.duplicatedQuery }],
+				layers: [{ ...(dupe as AbstractLayer), id: uuidv4(), duplicatedQuery: action.payload.duplicatedQuery }, ...state.layers],
 			};
 
 		case 'RANDOM_MODES':

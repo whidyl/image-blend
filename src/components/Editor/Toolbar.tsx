@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+var FileSaver = require('file-saver');
+var domtoimage = require('dom-to-image');
 //TODO: export via codepen API
 //TODO: load examples
 
@@ -31,11 +33,12 @@ const TBDropdown: React.FC = () => {
       <div className="py-1" role="none">
         <a
           href="/"
+          onClick={(e) => {e.preventDefault(); domtoimage.toBlob(document.querySelector("#mash")).then((blob: any) => FileSaver.saveAs(blob, 'myblend.png'))}}
           className="px-4 py-2 text-white text-sm block "
           role="menuitem"
           id="menu-item-0"
         >
-          Account settings
+          Export PNG
         </a>
         <a
           href="/"
@@ -92,9 +95,10 @@ interface Props {
   setMashSize: (newState: {width?: number, height?: number}) => void;
   randomizeModes: () => void;
   randomizeEffects: () => void;
+  randomizeEverything: () => void;
 }
 
-const Toolbar: React.FC<Props> = ({ mashSize, setMashSize, randomizeModes, randomizeEffects }) => {
+const Toolbar: React.FC<Props> = ({ mashSize, setMashSize, randomizeEverything, randomizeModes, randomizeEffects }) => {
   return (
     <div className="flex justify-evenly flex-shrink">
       <div className="p-3 mt-4 mr-4 w-full max-w-screen-lg bg-muidark-2 rounded-md flex items-center justify-around">
@@ -129,6 +133,7 @@ const Toolbar: React.FC<Props> = ({ mashSize, setMashSize, randomizeModes, rando
 
         <button className="px-4 py-2 ml-1 mr-1 basic-clickable" onClick={() => randomizeModes()}> Modes </button>
         <button className="px-4 py-2 ml-1 mr-1 basic-clickable" onClick={() => randomizeEffects()}> Effects </button>
+        <button className="px-4 py-2 ml-1 mr-1 basic-clickable" onClick={() => randomizeEverything()}> Everything! </button>
 
         <h1 className="mr-1 ml-1 text-white opacity-20">|</h1>
 

@@ -54,9 +54,19 @@ const Editor = () => {
 							randomizeEffects={() =>
 								layersDispatch({ type: 'RANDOM_EFFECTS' })
 							}
+							randomizeEverything={() => {
+								layersDispatch({type: 'DELETE_ALL'})
+								const numLayers = Math.ceil(Math.random()*7)
+								for (let i = 0; i <= numLayers; i++) {
+									layersDispatch({ type: 'NEW_LAYER'})
+								}
+								layersDispatch({ type: 'RANDOM_EFFECTS' })
+								layersDispatch({ type: 'RANDOM_MODES' })
+							}
+							}
 						/>
 					</div>
-					<div className="p-20 bg-muidark relative flex-auto flex items-center justify-center z-0 overflow-y-auto overflow-x-auto">
+					<div id="mash" className="p-20 bg-muidark relative flex-auto flex items-center justify-center z-0 overflow-y-auto overflow-x-auto">
 						<Mash layers={layers} mashSize={mashSize} />
 					</div>
 				</div>

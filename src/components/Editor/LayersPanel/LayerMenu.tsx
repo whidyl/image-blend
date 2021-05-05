@@ -2,10 +2,13 @@ import React from 'react';
 import ImgSearchBox from './ImgSearchBox';
 import Selector from './Selector';
 import Slider from './Slider';
+import Toggle from './Toggle';
 
 interface Props {
 	query: string;
 	opacity: number;
+  opacityDuration: number;
+  opacityAnimate: boolean;
   mode: string
 	effect: string;
 	effectDuration: number;
@@ -178,21 +181,9 @@ const LayerMenu: React.FC<Props> = (props) => {
       </div>
 
 			<div className="flex justify-around items-center mt-2">
-				<label className="text-white font-medium text-sm mr-5">Animate: </label>
-				<div className="relative inline-block w-10 mr-5 ml-1 align-middle select-none transition duration-200 ease-in">
-					<input
-						type="checkbox"
-						name="toggle"
-						id="toggle"
-						className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-						onClick={() => props.toggleEffectAnimate()}
-					/>
-					<label
-						htmlFor="toggle"
-						className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-					/>
-				</div>
-				<label className="text-white font-medium mr-2">Time (s): </label>
+				<Toggle toggle={() => props.toggleEffectAnimate()} value={props.effectAnimate} label="Animate" id="1"/>
+
+				<label className="text-white text-sm font-medium mr-2">Time (s): </label>
 				<input
 					type="number"
 					value={props.effectDuration}
@@ -213,24 +204,11 @@ const LayerMenu: React.FC<Props> = (props) => {
 			</span>
 
 			<div className="flex justify-around items-center mt-2">
-				<label className="text-white font-medium text-sm mr-5">Animate: </label>
-				<div className="relative inline-block w-10 mr-5 ml-1 align-middle select-none transition duration-200 ease-in">
-					<input
-						type="checkbox"
-						name="toggle2"
-						id="toggle2"
-						className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
-						onClick={() => props.toggleOpacityAnimate()}
-					/>
-					<label
-						htmlFor="toggle2"
-						className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-					/>
-				</div>
-				<label className="text-white font-medium mr-2">Time (s): </label>
+				<Toggle toggle={() => props.toggleOpacityAnimate()} value={props.opacityAnimate} label="Animate" id="2"/>
+				<label className="text-white text-sm font-medium mr-2">Time (s): </label>
 				<input
 					type="number"
-					value={props.effectDuration}
+					value={props.opacityDuration}
 					onChange={(e) =>
 						props.setOpacityDuration(Math.abs(parseFloat(e.target.value)))
 					}

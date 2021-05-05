@@ -117,46 +117,59 @@ const ImageLayer: React.FC<Props> = ({ layerData }) => {
 						</feDisplacementMap>
 					</>
 				);
-      
-      case 'svg-edge':
-        const s = (layerData.effectAmount)/100
-        return (
-          <>
-            <feConvolveMatrix
-						order="5 5"
-						kernelMatrix={`0 0 ${-1*s} 0 0   0 ${-1*s} ${-2*s} ${-1*s} 0   ${-1*s} ${-2*s} ${16*s} ${-2*s} ${-1*s}   0 ${-1*s} ${-2*s} ${-1*s} 0   0 0 ${-1*s} 0 0`}
-						divisor="1"
-						bias="1"
-						targetX="0"
-						targetY="0"
-						edgeMode="duplicate"
-						preserveAlpha="true"
-						x="0%"
-						y="0%"
-						width="100%"
-						height="100%"
-						in="displacementMap"
-						result="convolveMatrix1"
-					>
-            {layerData.animateEffect ? (
-            <animate
-								attributeName="kernelMatrix"
-								values={`0 0 -1 0 0   0 -1 -2 -1 0   -1 -2 16 -2 -1   0 -1 -2 -1 0   0 0 -1 0 0; 
+
+			case 'svg-edge':
+				const s = layerData.effectAmount / 100;
+				return (
+					<>
+						<feConvolveMatrix
+							order="5 5"
+							kernelMatrix={`0 0 ${-1 * s} 0 0   0 ${-1 * s} ${-2 * s} ${
+								-1 * s
+							} 0   ${-1 * s} ${-2 * s} ${16 * s} ${-2 * s} ${-1 * s}   0 ${
+								-1 * s
+							} ${-2 * s} ${-1 * s} 0   0 0 ${-1 * s} 0 0`}
+							divisor="1"
+							bias="1"
+							targetX="0"
+							targetY="0"
+							edgeMode="duplicate"
+							preserveAlpha="true"
+							x="0%"
+							y="0%"
+							width="100%"
+							height="100%"
+							in="displacementMap"
+							result="convolveMatrix1"
+						>
+							{layerData.animateEffect ? (
+								<animate
+									attributeName="kernelMatrix"
+									values={`0 0 -1 0 0   0 -1 -2 -1 0   -1 -2 16 -2 -1   0 -1 -2 -1 0   0 0 -1 0 0; 
                          0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 0 0;
                          0 0 -1 0 0   0 -1 -2 -1 0   -1 -2 16 -2 -1   0 -1 -2 -1 0   0 0 -1 0 0;`}
-								dur={`${layerData.effectDuration}s`}
-								repeatCount="indefinite"
-						/>
-            ) : null}
-
-          </feConvolveMatrix>
-          </>
-        )
+									dur={`${layerData.effectDuration}s`}
+									repeatCount="indefinite"
+								/>
+							) : null}
+						</feConvolveMatrix>
+					</>
+				);
 
 			default:
 				return null;
 		}
 	};
+
+  const effectAnimation = () => (
+    layerData.animateEffect
+    ? `${layerData.effect} ${layerData.effectDuration}s ease-in-out infinite`
+    : 'none'
+  )
+
+  const opacityAnimation = () => (
+    layerData.animateOpacity ? `opacity ${layerData.opacityDuration}s ease-in-out infinite` : 'none'
+  )
 
 	return (
 		<>
@@ -179,13 +192,11 @@ const ImageLayer: React.FC<Props> = ({ layerData }) => {
 					objectFit: 'cover',
 					position: 'inherit',
 					opacity: `${layerData.opacity}%`,
-					filter: layerData.effect.includes('svg') ? `url(#filter-${layerData.id})` : effectStr(),
+					filter: layerData.effect.includes('svg')
+						? `url(#filter-${layerData.id})`
+						: effectStr(),
 					mixBlendMode: layerData.mode as CSS.Property.MixBlendMode,
-					animation: layerData.animateEffect
-						? `${layerData.effect} ${
-								layerData.effectDuration ? layerData.effectDuration : 3
-						  }s ease-in-out infinite`
-						: 'none',
+					animation: `${effectAnimation()}, ${opacityAnimation()}`,
 				}}
 			/>
 		</>
