@@ -36,6 +36,7 @@ export type LayersAction =
 	  }
 	| { type: 'MOVE_LAYER'; payload: { from: number; to: number } }
   | { type: 'NEW_LAYER' }
+  | { type: 'DUPLICATE_LAYER'; payload: { id: string } }
   | { type: 'DELETE_LAYER'; payload: { id: string } }
   | { type: 'SHUFFLE_ALL' }
   | { type: 'RANDOM_EFFECTS' }

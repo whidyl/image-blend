@@ -24,6 +24,7 @@ interface Props {
 	setEffectDuration: (duration: number) => void
 	setEffectAmount: (effectAmount: number) => void;
 	deleteSelf: () => void;
+	duplicateLayer: () => void;
 }
 
 const Layer: React.FC<Props> = (props) => {
@@ -64,6 +65,14 @@ const Layer: React.FC<Props> = (props) => {
 				<h1 className="text-white font-sans whitespace-nowrap">{query}</h1>
 				<span className="w-full justify-end flex">
 					<img
+						className="cursor-pointer h-5 opacity-50 hover:opacity-100 mr-3"
+						src="icons8-duplicate-24.png"
+						alt="duplicate layer"
+						onClick={() => {
+							props.duplicateLayer();
+						}}
+					/>
+					<img
 						className={`cursor-pointer h-5 opacity-50 hover:opacity-100  transition-transform transform ${
 							open ? 'rotate-180' : 'rotate-0'
 						}`}
@@ -78,7 +87,7 @@ const Layer: React.FC<Props> = (props) => {
 						onClick={() => {
 							props.deleteSelf();
 						}}
-					/>
+					/>					
 				</span>
 			</div>
 			<div
