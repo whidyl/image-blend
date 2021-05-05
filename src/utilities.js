@@ -12,7 +12,7 @@ const goodSearchTerms = ['fire', 'lightning', 'rapper', 'explosion', 'abstract',
 
 const modes = ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"]
 
-const effects = ["none", "blur", "brightness", "contrast", "grayscale", "hue-rotate", "invert", "saturate"]
+const effects = ["none", "blur", "brightness", "contrast", "grayscale", "hue-rotate", "invert", "saturate", "svg-edge", "svg-wave", "svg-sobel", "svg-displace"]
 
 const randomFrom = (arr) => {
     return arr[Math.floor(arr.length*Math.random())]

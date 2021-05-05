@@ -55,6 +55,22 @@ const effectOptions = [
 		label: 'Saturation',
 		value: 'saturate',
 	},
+  {
+		label: 'Displace',
+		value: 'svg-displace',
+	},
+  {
+		label: 'Sobel',
+		value: 'svg-sobel',
+	},
+  {
+    label: 'Waves',
+    value: 'svg-waves'
+  },
+  {
+    label: 'Edge Detect',
+    value: 'svg-edge'
+  }
 ];
 
 const blendingOptions = [
@@ -124,43 +140,6 @@ const blendingOptions = [
 	},
 ];
 
-const animationOptions = [
-	{
-		label: 'None',
-		value: 'none',
-	},
-	{
-		label: 'Color Shift',
-		value: 'hue',
-	},
-	{
-		label: 'Fade in / Out',
-		value: 'opacity',
-	},
-	{
-		label: 'Spin',
-		value: 'rotate',
-	},
-	{
-		label: 'Saturation Pulse',
-		value: 'saturate',
-	},
-
-	{
-		label: 'Focus Pulse',
-		value: 'blur',
-	},
-
-	{
-		label: 'Contrast Pulse',
-		value: 'contrast',
-	},
-
-	{
-		label: 'Invert',
-		value: 'invert',
-	},
-];
 
 const LayerMenu: React.FC<Props> = (props) => {
 	return (
