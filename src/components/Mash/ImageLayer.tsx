@@ -25,7 +25,6 @@ const ImageLayer: React.FC<Props> = ({ layerData }) => {
 				return `${layerData.effect}(${layerData.effectAmount}%)`;
 		}
 	};
-	//${effectStr()}
 
 	const svgFilter = () => {
 		switch (layerData.effect) {

@@ -5,6 +5,7 @@ export interface AbstractLayer {
 
 export interface ILayer extends AbstractLayer {
 	url: string;
+	duplicatedQuery: string;
 	mode: string;
 
 	effect: string;
@@ -36,7 +37,7 @@ export type LayersAction =
 	  }
 	| { type: 'MOVE_LAYER'; payload: { from: number; to: number } }
   | { type: 'NEW_LAYER' }
-  | { type: 'DUPLICATE_LAYER'; payload: { id: string } }
+  | { type: 'DUPLICATE_LAYER'; payload: { id: string, duplicatedQuery: string } }
   | { type: 'DELETE_LAYER'; payload: { id: string } }
   | { type: 'SHUFFLE_ALL' }
   | { type: 'RANDOM_EFFECTS' }

@@ -104,8 +104,8 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 													layersDispatch({ type: "DELETE_LAYER", payload: {id: layer.id}})
 												}}
 
-												duplicateLayer={() => {
-													layersDispatch({ type: "DUPLICATE_LAYER", payload: {id: layer.id}})
+												duplicateLayer={(duplicatedQuery: string) => {
+													layersDispatch({ type: "DUPLICATE_LAYER", payload: {id: layer.id, duplicatedQuery: duplicatedQuery}})
 												}}
 											/>
 										)}

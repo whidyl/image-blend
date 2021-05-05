@@ -124,10 +124,13 @@ function layerReducer(
 					{
 						type: 'IMAGE_SEARCH',
 						mode: 'normal',
+                        duplicatedQuery: '',
 						effect: 'none',
 						effectAmount: 75,
+                        effectDuration: 3,
 						url: '',
 						opacity: 100,
+                        opacityDuration: 3,
 						id: uuidv4(),
 					},
 					...state.layers,
@@ -137,7 +140,7 @@ function layerReducer(
 		case 'DUPLICATE_LAYER':
 			let dupe = state.layers.find((l) => l.id === action.payload.id);
 			return {
-				layers: [...state.layers, { ...(dupe as AbstractLayer), id: uuidv4() }],
+				layers: [...state.layers, { ...(dupe as AbstractLayer), id: uuidv4(), duplicatedQuery: action.payload.duplicatedQuery }],
 			};
 
 		case 'RANDOM_MODES':

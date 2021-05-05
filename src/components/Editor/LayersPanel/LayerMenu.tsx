@@ -6,6 +6,7 @@ import Slider from './Slider';
 interface Props {
 	query: string;
 	opacity: number;
+  mode: string
 	effect: string;
 	effectDuration: number;
   effectAnimate: boolean;
@@ -152,6 +153,7 @@ const LayerMenu: React.FC<Props> = (props) => {
 			<Selector
 				label="Modes"
 				options={blendingOptions}
+        current={props.mode}
 				onSelectChange={(val) => props.setMode(val)}
 			/>
 
@@ -159,6 +161,7 @@ const LayerMenu: React.FC<Props> = (props) => {
 			<Selector
 				label="Effect"
 				options={effectOptions}
+        current={props.effect}
 				onSelectChange={(val) => props.setEffect(val)}
 			/>
 
@@ -189,14 +192,14 @@ const LayerMenu: React.FC<Props> = (props) => {
 						className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
 					/>
 				</div>
-				<label className="text-white font-medium mr-2">Time: </label>
+				<label className="text-white font-medium mr-2">Time (s): </label>
 				<input
 					type="number"
 					value={props.effectDuration}
 					onChange={(e) =>
 						props.setEffectDuration(Math.abs(parseFloat(e.target.value)))
 					}
-					className="px-2 py-2 w-16 basic-clickable bg-muidark-2"
+					className="px-2 py-2 w-9 basic-clickable bg-muidark-2"
 				/>
 			</div>
 
@@ -224,14 +227,14 @@ const LayerMenu: React.FC<Props> = (props) => {
 						className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
 					/>
 				</div>
-				<label className="text-white font-medium mr-2">Time: </label>
+				<label className="text-white font-medium mr-2">Time (s): </label>
 				<input
 					type="number"
 					value={props.effectDuration}
 					onChange={(e) =>
 						props.setOpacityDuration(Math.abs(parseFloat(e.target.value)))
 					}
-					className="px-2 py-2 w-16 basic-clickable bg-muidark-2"
+					className="px-2 py-2 w-9 basic-clickable bg-muidark-2"
 				/>
 			</div>
 		</div>

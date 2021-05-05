@@ -24,12 +24,12 @@ interface Props {
 	setEffectDuration: (duration: number) => void
 	setEffectAmount: (effectAmount: number) => void;
 	deleteSelf: () => void;
-	duplicateLayer: () => void;
+	duplicateLayer: (duplicatedQuery: string) => void;
 }
 
 const Layer: React.FC<Props> = (props) => {
 	const [open, setOpen] = useState<boolean>(false);
-	const [query, setQuery] = useState(randomGoodTerm()); //TODO: initialize to random cool image
+	const [query, setQuery] = useState(props.layer.duplicatedQuery === '' ? randomGoodTerm() : props.layer.duplicatedQuery); //TODO: initialize to random cool image
 
 	const updateURL = async () => {
 		const response = await axios.get(
@@ -39,7 +39,10 @@ const Layer: React.FC<Props> = (props) => {
 	};
 
 	useEffect(() => {
-		updateURL();
+		// if the layer was duplicated, we don't want to refresh the url.
+		if (props.layer.duplicatedQuery === '') {
+			updateURL();
+		}
 	}, []);
 
 	const Handle = (props: any) => {
@@ -69,7 +72,7 @@ const Layer: React.FC<Props> = (props) => {
 						src="icons8-duplicate-24.png"
 						alt="duplicate layer"
 						onClick={() => {
-							props.duplicateLayer();
+							props.duplicateLayer(query);
 						}}
 					/>
 					<img
@@ -99,6 +102,7 @@ const Layer: React.FC<Props> = (props) => {
 					<LayerMenu
 						query={query}
 						opacity={props.layer.opacity}
+						mode={props.layer.mode}
 						effect={props.layer.effect}
 						effectAmount={props.layer.effectAmount}
 						effectAnimate={props.layer.animateEffect}

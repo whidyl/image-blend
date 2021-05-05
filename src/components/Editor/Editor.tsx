@@ -15,6 +15,7 @@ const initialLayers: { layers: ILayer[] } = {
 		{
 			id: '1',
 			type: 'IMAGE_SEARCH',
+			duplicatedQuery: '',
 			mode: 'normal',
 			effect: 'none',
 			effectAmount: 100,

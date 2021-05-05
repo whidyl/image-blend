@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 interface Props {
 	className?: string;
 	label: string;
+	current: string;
 	options: { label: string; value: string }[];
-	onSelectChange: ( val: string ) => void;
+	onSelectChange: (val: string) => void;
 }
 
 const CheckMark = () => (
@@ -25,9 +26,15 @@ const CheckMark = () => (
 	</span>
 );
 
-const Selector: React.FC<Props> = ({className, label, options, onSelectChange }) => {
+const Selector: React.FC<Props> = ({
+	className,
+	label,
+	options,
+	current,
+	onSelectChange,
+}) => {
 	const [open, setOpen] = useState(false);
-	const [selected, setSelected] = useState({label: 'None', value: 'none'});
+	const [selected, setSelected] = useState({ label: 'None', value: 'none' });
 
 	return (
 		<div>
@@ -44,7 +51,11 @@ const Selector: React.FC<Props> = ({className, label, options, onSelectChange })
 					onClick={() => setOpen(!open)}
 				>
 					<span className="flex items-center">
-						<span className="block truncate text-sm text-white">{selected.label}</span>
+						<span className="block truncate text-sm text-white">
+							{
+								options.find(option => option.value === current)?.label
+							}
+						</span>
 					</span>
 					<span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 						<svg
@@ -73,7 +84,7 @@ const Selector: React.FC<Props> = ({className, label, options, onSelectChange })
 							aria-activedescendant="listbox-option-3"
 						>
 							<>
-								{options.map(option => (
+								{options.map((option) => (
 									<li
 										key={option.label}
 										className="text-white cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-muidark-5"
@@ -91,7 +102,6 @@ const Selector: React.FC<Props> = ({className, label, options, onSelectChange })
 											onSelectChange(selected.value);
 										}}
 									>
-										{/* TODO: preview on mouse hover */}
 										<div className="flex items-center">
 											<span className="font-normal ml-3 block truncate">
 												{option.label}
