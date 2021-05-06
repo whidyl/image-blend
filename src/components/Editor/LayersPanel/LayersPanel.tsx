@@ -34,8 +34,8 @@ const LayersPanel: React.FC<Props> = ({ layers, layersDispatch }) => {
 		<DragDropContext onDragEnd={onDragEnd}>
 			<div className="bg-muidark-2 p-3 m-4 rounded-md flex-1 flex-col justify-end items-center w-80 h-l-stack overflow-y-auto ">
 				<h1 className="text-white bold text-center">
-					{' '}
-					<b>Image Layer Stack</b>
+					
+					<b>Blend Stack</b>
 				</h1>
 				<div
 					className="bg-muidark-5 mb-2 mt-2 p-2 rounded-md w-72 flex justify-center opacity-30 hover:opacity-100 cursor-pointer"

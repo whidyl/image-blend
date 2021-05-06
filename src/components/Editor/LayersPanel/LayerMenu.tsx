@@ -7,6 +7,7 @@ import Toggle from './Toggle';
 interface Props {
 	query: string;
 	opacity: number;
+	id: string
   opacityDuration: number;
   opacityAnimate: boolean;
   mode: string
@@ -169,7 +170,7 @@ const LayerMenu: React.FC<Props> = (props) => {
 			/>
 
       <div className="flex justify-start items-center">
-        <label className="text-white font-medium ml-1 text-sm mr-4">
+        <label className="text-white font-medium ml-1 text-sm mr-2 mt-2">
           Amount:
         </label>
         <Slider
@@ -181,7 +182,7 @@ const LayerMenu: React.FC<Props> = (props) => {
       </div>
 
 			<div className="flex justify-around items-center mt-2">
-				<Toggle toggle={() => props.toggleEffectAnimate()} value={props.effectAnimate} label="Animate" id="1"/>
+				<Toggle toggle={() => props.toggleEffectAnimate()} value={props.effectAnimate} label="Animate" id={`1-${props.id}`}/>
 
 				<label className="text-white text-sm font-medium mr-2">Time (s): </label>
 				<input
@@ -197,14 +198,14 @@ const LayerMenu: React.FC<Props> = (props) => {
 			<hr className="bg-white opacity-30 mt-4 mb-4" />
 
 			<span className="mt-2 flex flex-row items-center">
-				<label className="ml-1 mr-6 text-white text-sm font-medium">
+				<label className="ml-1 mr-5 text-white text-sm font-medium">
 					Opacity:
 				</label>
 				<Slider val={props.opacity} setVal={props.setOpacity} />
 			</span>
 
 			<div className="flex justify-around items-center mt-2">
-				<Toggle toggle={() => props.toggleOpacityAnimate()} value={props.opacityAnimate} label="Animate" id="2"/>
+				<Toggle toggle={() => props.toggleOpacityAnimate()} value={props.opacityAnimate} label="Animate" id={`2-${props.id}`}/>
 				<label className="text-white text-sm font-medium mr-2">Time (s): </label>
 				<input
 					type="number"

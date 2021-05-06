@@ -40,22 +40,6 @@ const TBDropdown: React.FC = () => {
         >
           Export PNG
         </a>
-        <a
-          href="/"
-          className="px-4 py-2 text-white text-sm block"
-          role="menuitem"
-          id="menu-item-1"
-        >
-          Support
-        </a>
-        <a
-          href="/"
-          className="px-4 py-2 text-white text-sm block"
-          role="menuitem"
-          id="menu-item-2"
-        >
-          License
-        </a>
         <form method="POST" action="#" role="none">
           <button
             type="submit"
@@ -63,7 +47,7 @@ const TBDropdown: React.FC = () => {
             role="menuitem"
             id="menu-item-3"
           >
-            Sign out
+            About Developer
           </button>
         </form>
       </div>
@@ -81,7 +65,7 @@ const TBDropdown: React.FC = () => {
           aria-expanded="true"
           aria-haspopup="true"
         >
-          Finalize
+          Options
           <Arrow />
         </button>
       </div>

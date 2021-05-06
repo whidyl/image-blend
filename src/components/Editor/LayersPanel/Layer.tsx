@@ -101,6 +101,7 @@ const Layer: React.FC<Props> = (props) => {
 				{open ? (
 					<LayerMenu
 						query={query}
+						id={props.layer.id}
 						opacity={props.layer.opacity}
 						opacityDuration={props.layer.opacityDuration}
 						opacityAnimate={props.layer.animateOpacity}
